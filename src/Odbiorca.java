@@ -1,10 +1,12 @@
-public class Odbiorca extends Osoba {
+public class Odbiorca extends Osoba
+{
+    public Odbiorca(String name, String surname)
+    {
+        super(name, surname);
+    }
 
-	/**
-	 * 
-	 * @param paczka
-	 */
-	public void potwierdzOdbior(Paczka paczka) {
+	public void potwierdzOdbior(Paczka paczka)
+    {
 
 
 	}

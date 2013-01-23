@@ -1,0 +1,36 @@
+<html xmlns='http://www.w3.org/1999/xhtml'>  
+    <head>  
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />  
+        <title>Gdzie jest kurier?</title>  
+        <script src='http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=AIzaSyC6uVt5NxjB2EZSyXhWymXM8r8LedWzg6g' type='text/javascript'></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    </head>  
+    <body onunload='GUnload()'>  
+	
+	<applet code=ApletMapa.class width=600 height=600></applet> 
+	
+    <script type='text/javascript'>
+	var map;
+	var kurier = new google.maps.LatLng(50.067910653813236, 19.938511848449707);
+	function mapaStart() 
+	{
+		var myOptions = {
+			zoom: 14,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			center: kurier
+		}
+		
+		map = new google.maps.Map(document.getElementById("mapa"), myOptions);
+		
+		var markerDluga = new google.maps.Marker(
+		{
+			position: kurier, 
+			map: map, 
+			title:"Pozycja Kuriera"
+		});       
+	}
+    </script>
+    <div id='mapa' style='width: 700px; height: 600px; '>
+    </div>
+    </body>  
+</html> 

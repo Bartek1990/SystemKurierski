@@ -18,7 +18,7 @@ public class Nadawca extends Osoba
 
 	public Paczka nadajPaczke()
     {
-		Paczka paczka = new Paczka();
+		Paczka paczka = new Paczka(1000, "prostytutki", 100, true, "w drodze kurwa");
         return paczka;
 	}
 
