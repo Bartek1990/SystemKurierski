@@ -1,4 +1,4 @@
-public class Pracownik extends Osoba {
+public class Pracownik {
 
 	/**
 	 * 

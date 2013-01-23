@@ -1,4 +1,4 @@
-public class Kurier extends Osoba {
+public class Kurier extends Pracownik {
 
 	/**
 	 * 
@@ -6,7 +6,7 @@ public class Kurier extends Osoba {
 	 */
     private int idKuriera;
 
-    Kurier(int idKuriera, String login, String password, String forname, String surname, String imie)
+    public Kurier()
     {
 
     }
