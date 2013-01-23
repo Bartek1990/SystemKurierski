@@ -1,9 +1,16 @@
-public class Paczka {
-
-	private int masa;
-	private String zawartosc;
-	private int rozmiar;
-	private boolean priorytet;
-	private String status;
-
+public class Paczka
+{
+	int masa;
+	String zawartosc;
+	int rozmiar;
+	boolean priorytet;
+	String status;
+    public Paczka(int masa, String zawartosc, int rozmiar, boolean priorytet, String status)
+    {
+        this.masa = masa;
+        this.zawartosc = zawartosc;
+        this.rozmiar = rozmiar;
+        this.priorytet = priorytet;
+        this.status = status;
+    }
 }

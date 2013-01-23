@@ -1,20 +1,24 @@
-public class Osoba {
+public class Osoba
+{
+     String name, surname;
 
-	/**
-	 * 
-	 * @param login
-	 * @param haslo
-	 */
-	public void zaloguj(String login, String haslo) {
-		throw new UnsupportedOperationException();
+     public Osoba(String name, String surname)
+     {
+         this.name = name;
+         this.surname = surname;
+     }
+
+
+
+
+	public void zaloguj(String login, String haslo)
+    {
+
 	}
 
-	/**
-	 * 
-	 * @param idPaczki
-	 */
-	public void sledzPaczke(int idPaczki) {
-		throw new UnsupportedOperationException();
+	public void sledzPaczke(int idPaczki)
+    {
+
 	}
 
 }
