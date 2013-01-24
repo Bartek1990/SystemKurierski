@@ -1,11 +1,13 @@
-public class Pracownik extends Osoba{
+package people;
+
+public class Employee extends Osoba{
 
     int employeeId;
-    Pracownik(Pracownik pracownik)
+    Employee(Employee pracownik)
     {
         this.employeeId = pracownik.employeeId;
     }
-    Pracownik(String login, String password, String forename, String surename,
+    Employee(String login, String password, String forename, String surename,
               String empDate, String earnings, int baseid, String workTime, String nip,
               String account, String DataName, int dataCountryId, String dataDetails, int zipCode, String city, String tel, String mail)
     {
@@ -22,14 +24,8 @@ public class Pracownik extends Osoba{
         this.employeeId = 1;//tutaj odpowiedź z serwera.
 
     }
-
     @Override
-    public void zaloguj(String login, String haslo) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void sledzPaczke(int idPaczki) {
+    public void followPackage(int packId) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 }

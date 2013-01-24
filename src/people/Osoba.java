@@ -1,3 +1,5 @@
+package people;
+
 abstract class Osoba
 {
     private String name;

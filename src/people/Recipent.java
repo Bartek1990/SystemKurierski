@@ -1,3 +1,5 @@
+package people;
+
 public class Odbiorca extends Osoba
 {
     public Odbiorca(String name, String surname)

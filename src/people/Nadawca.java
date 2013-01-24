@@ -1,3 +1,5 @@
+package people;
+
 public class Nadawca  extends Osoba
 {
     String password, login;

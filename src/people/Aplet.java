@@ -1,3 +1,4 @@
+package people;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,8 +11,6 @@ import java.lang.*;
 import java.sql.SQLException;
 
 import com.sun.rowset.*;
-
-import static javax.swing.text.StyleConstants.setIcon;
 
 // By uruchomić applet przeczytaj plik readme_applet.txt
 public class Aplet extends JApplet implements ActionListener
