@@ -1,13 +1,11 @@
 public class Kurier extends Pracownik {
 
-	/**
-	 * 
-	 * @param paczka
-	 */
+
     private int idKuriera;
 
-    public Kurier()
+    public Kurier(Pracownik pracownik)
     {
+        super(pracownik);
 
     }
 	public void ustawStatus(Paczka paczka) {
