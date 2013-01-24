@@ -1,3 +1,5 @@
+package people;
+
 import java.io.*;
 import java.net.*;
 import java.sql.*;
