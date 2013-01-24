@@ -6,8 +6,7 @@ public class Recipient extends Person {
 
     }
     public boolean confirmPickup(Pack pack){
-
-         return true;
+        return false;
     }
     public void logIn(String login, String password){
 
