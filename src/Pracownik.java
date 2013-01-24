@@ -1,4 +1,4 @@
-public class Pracownik {
+public class Pracownik extends Osoba{
 
 	/**
 	 * 
@@ -16,4 +16,13 @@ public class Pracownik {
         return false;
 	}
 
+    @Override
+    public void zaloguj(String login, String haslo) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void sledzPaczke(int idPaczki) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

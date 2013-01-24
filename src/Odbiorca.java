@@ -2,7 +2,8 @@ public class Odbiorca extends Osoba
 {
     public Odbiorca(String name, String surname)
     {
-        super(name, surname);
+       setName(name);
+
     }
 
 	public void potwierdzOdbior(Paczka paczka)
@@ -11,4 +12,11 @@ public class Odbiorca extends Osoba
 
 	}
 
+    @Override
+    public void zaloguj(String login, String haslo) {
+    }
+
+    @Override
+    public void sledzPaczke(int idPaczki) {
+    }
 }
