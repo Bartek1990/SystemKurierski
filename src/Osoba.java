@@ -1,24 +1,21 @@
-public class Osoba
+abstract class Osoba
 {
-     String name, surname;
+    private String name;
+    private String surname;
+    abstract public void zaloguj(String login, String haslo);
+	abstract public void sledzPaczke(int idPaczki);
+    public String getName(){
+        return name;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+    public String getSurname(){
+        return surname;
+    }
+    public void setSurname(String surname){
+        this.surname = surname;
+    }
 
-     public Osoba(String name, String surname)
-     {
-         this.name = name;
-         this.surname = surname;
-     }
-
-
-
-
-	public void zaloguj(String login, String haslo)
-    {
-
-	}
-
-	public void sledzPaczke(int idPaczki)
-    {
-
-	}
 
 }

@@ -18,7 +18,7 @@ public class Pracownik {
         String query2 = "INSERT INTO employee VALUES " +
                 "(0,"+login+","+password+","+forename+","+surename+","+dataId+","+empDate+","+earnings+","+baseid+","+workTime+","+false+","+nip+","+account+")";
         String queryDEmployeeId = "SELECT MAX(employee_id) FROM employee";
-        this.employeeId = 1;//tutaj odpowiedź z serwerka.
+        this.employeeId = 1;//tutaj odpowiedź z serwera.
 
     }
 

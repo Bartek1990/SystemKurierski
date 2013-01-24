@@ -1,16 +1,18 @@
-public class Nadawca extends Osoba
+public class Nadawca  extends Osoba
 {
     String password, login;
     int NIP;
-    public Nadawca(Osoba osoba, String login, String password)
+    public Nadawca(String name, String surname, String login, String password)
     {
-        super(osoba.name, osoba.surname);
+        setName(name);
+        setSurname(surname);
         this.login = login;
         this.password = password;
     }
-    public Nadawca(Osoba osoba, String login, String password, int NIP)
+    public Nadawca(String name, String surname, String login, String password, int NIP)
     {
-        super(osoba.name, osoba.surname);
+        setName(name);
+        setSurname(surname);
         this.login = login;
         this.password = password;
         this.NIP = NIP;
@@ -22,4 +24,13 @@ public class Nadawca extends Osoba
         return paczka;
 	}
 
+    @Override
+    public void zaloguj(String login, String haslo) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void sledzPaczke(int idPaczki) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 }
