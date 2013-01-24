@@ -5,13 +5,13 @@ import java.net.*;
 /*
  * Server jest wielowątkowy. Jednak po odpowiedzi zamyka strumień klienta.
  */
-public class Oddzial
+public class Branch
 {
     private ServerSocket server;
     private int port = 8867;
    // private Transaction trans;
 
-    public Oddzial() //konstruktor który tworzy serwer
+    public Branch() //konstruktor który tworzy serwer
     {
         try {
 
@@ -40,7 +40,7 @@ public class Oddzial
     }
     public static void main(String[] argh)
     {
-        Oddzial oddzial = new Oddzial();
+        Branch oddzial = new Branch();
         oddzial.handleCon();
     }
 }

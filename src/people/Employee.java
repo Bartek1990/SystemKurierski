@@ -1,6 +1,6 @@
 package people;
 
-public class Employee extends Osoba{
+public class Employee extends Person{
 
     int employeeId;
     Employee(Employee pracownik)
