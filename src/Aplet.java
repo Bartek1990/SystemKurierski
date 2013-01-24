@@ -1,5 +1,5 @@
 
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -11,6 +11,8 @@ import java.sql.SQLException;
 
 import com.sun.rowset.*;
 
+import static javax.swing.text.StyleConstants.setIcon;
+
 // By uruchomić applet przeczytaj plik readme_applet.txt
 public class Aplet extends JApplet implements ActionListener
 {
@@ -18,26 +20,45 @@ public class Aplet extends JApplet implements ActionListener
     private JButton zapytanko = null;
     private JSObject window = null;
     private JLabel napis = null;
-    private JButton test = null;
+    private JButton rejestracjaPracownika = null;
+    //formularz
+    private JTextField login = null;
+    private JTextField password = null;
+    private JTextField forname = null;
+    private JTextField surname = null;
+    private JTextField empDate = null;
+    private JTextField earnings = null;
+    private JTextField worktime = null;
+    private JTextField nip = null;
+    private JTextField account = null;
+    private JTextField name = null; //do korespondencji
+    private JButton zarejestruj;
+
+
     Aplet aplet = this;
     Client klient;
     @Override
     public void init()
     {
 
-        window = JSObject.getWindow(this);
+        //window = JSObject.getWindow(this);   //potrzebne do uruchomienia na stronie z JS
         setLayout(new FlowLayout());
-        test = new JButton("button testowy");
+        rejestracjaPracownika = new JButton("Zarejestruj pracownika");
         callJSButton = new JButton("Gdzie jest kurier?");
         zapytanko = new JButton("wyslij zapytanie?");
         napis = new JLabel("");
-        callJSButton.addActionListener(Aplet.this);
-        zapytanko.addActionListener(Aplet.this);
-
-        add(test);
-        add(callJSButton);
-        add(zapytanko);
+        callJSButton.addActionListener(this);
+        zapytanko.addActionListener(this);
+        rejestracjaPracownika.addActionListener(this);
+        zarejestruj = new JButton("zarejestruj");
+        zarejestruj.addActionListener(this);
+        add(rejestracjaPracownika);
+        //add(callJSButton);
+        //add(zapytanko);
         add(napis);
+
+
+
     }
     public void destroy()    //dziwnie to działa ale w sumie nie ma się co dziwić :D. Jak ktoś wpadnie na pomysł jak zrobić żeby proces java się zamykał po zamknięciu karty przeglądarki to niech to poprawi
     {
@@ -46,6 +67,7 @@ public class Aplet extends JApplet implements ActionListener
 
     public void actionPerformed(ActionEvent e)
     {
+
         klient = new Client();
         if(e.getSource() == callJSButton)
         {
@@ -74,9 +96,39 @@ public class Aplet extends JApplet implements ActionListener
                 e1.printStackTrace();
             }
         }
-        else if(e.getSource() == test)
+        else if(e.getSource() == rejestracjaPracownika)
         {
+            napis.setText(" ");
+            remove(rejestracjaPracownika);
+            setLayout(new FlowLayout());
+            login = new JTextField("Login");
+            password = new JTextField("Haslo");
+            forname = new JTextField("Imię");
+            surname = new JTextField("Nazwisko");
+            empDate = new JTextField("Data Zatrudnienia");
+            earnings = new JTextField("Zarobki");
+            worktime = new JTextField("Czas Pracy");
+            nip = new JTextField("NIP");
+            account = new JTextField("nr Konta");
+            name = new JTextField("Adres Korespondencyjny");
+
+            add(zarejestruj);
+            add(login);
+            add(password);
+            add(forname);
+            add(surname);
+            add(empDate);
+            add(earnings);
+            add(worktime);
+            add(nip);
+            add(account);
+            add(name);
 
         }
+        else if(e.getSource() == zarejestruj)
+        {
+           // new Pracownik(login, password, forname, surname, empDate, earnings, worktime, nip, account, name); //wg konstruktora
+        }
+
     }
 }
