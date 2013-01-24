@@ -1,4 +1,5 @@
-public class Pracownik {
+public class Pracownik extends Osoba{
+
     int employeeId;
     Pracownik(Pracownik pracownik)
     {
@@ -22,14 +23,13 @@ public class Pracownik {
 
     }
 
-	public void wybierzTransport(boolean zgoda, Paczka paczka)
-    {
+    @Override
+    public void zaloguj(String login, String haslo) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 
-	}
-
-
-	public boolean zbadajPrzesylke(Paczka paczka) {
-        return false;
-	}
-
+    @Override
+    public void sledzPaczke(int idPaczki) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 }
