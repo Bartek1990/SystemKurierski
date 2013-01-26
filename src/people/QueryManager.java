@@ -77,7 +77,8 @@ public class QueryManager implements Runnable
                 } else
                 {
                     System.out.println("Jest to wiadomość dla bazy danych");
-                    if(klient.substring(0,6).equals("select"))
+
+                    if(klient.substring(0,6).toLowerCase().equalsIgnoreCase("select"))
                     {
                         write.writeObject(query.readDataBase(klient));
                     }
