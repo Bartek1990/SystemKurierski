@@ -48,6 +48,9 @@ public class ServerManager extends JFrame {
         createPage3();
         createPage4();
         createPage5();
+        createPage6();
+        createPage7();
+        createPage8();
 
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Klienci", panel1);
