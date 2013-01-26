@@ -1,13 +1,14 @@
 package people;
 
 import com.sun.rowset.CachedRowSetImpl;
+import exceptions.NoCountryException;
 
 import java.sql.SQLException;
 
 public class Recipient extends Person {
 
     int recipentId;
-    public Recipient(String name, String country, String details, String zipCode, String city, String tel, String... mail)
+    public Recipient(String name, String country, String details, String zipCode, String city, String tel, String... mail) throws NoCountryException
     {
         String krajid = null;
         //sprawdzenie czy podany kraj juz jest wpisany
@@ -19,7 +20,7 @@ public class Recipient extends Person {
             }
             else
             {
-                //rzuć brak takiego kraju w bazie
+                throw new NoCountryException();
             }
 
             if(mail == null)
@@ -35,7 +36,6 @@ public class Recipient extends Person {
                         + zipCode + "','" + city + "','" + tel + "','" + mail + "')");
             }
             tmp = Client.request("SELECT MAX(dataid) FROM data");
-            tmp.first();
 
             this.recipentId = Integer.parseInt(tmp.getString(1));//tutaj odpowiedź z serwera.
         } catch (SQLException e) {

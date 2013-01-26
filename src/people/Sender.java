@@ -3,6 +3,7 @@ package people;
 
 import com.sun.rowset.CachedRowSetImpl;
 import exceptions.AlreadyInDbException;
+import exceptions.NoCountryException;
 
 import java.sql.SQLException;
 
@@ -10,7 +11,7 @@ public class Sender extends Person {
     int senderId;
     Sender(String login, String pass, String tel, String imie,
            String nazwisko, String nip, String adres, String kod,
-           String kraj, String miasto, String mail, String corp, String reg) throws AlreadyInDbException
+           String kraj, String miasto, String mail, String corp, String reg) throws AlreadyInDbException, NoCountryException
     {
         if (login.equals("") || pass.equals("") || imie.equals("") ||
                 nazwisko.equals("") || nip.equals("") || adres.equals("") ||
@@ -39,7 +40,7 @@ public class Sender extends Person {
                     }
                     else
                     {
-                        //rzuć brak takiego kraju w bazie
+                        throw new NoCountryException();
                     }
 
                     Client.request("INSERT INTO data (name, countryid, details, zipcode, city, tel, mail) " +
@@ -49,6 +50,11 @@ public class Sender extends Person {
                     Client.request("INSERT INTO user (login, password, dataid, nip) VALUES ('" + login + "','" + pass + "',(SELECT MAX(dataid) FROM data),'" + nip + "')");
                     Client.request("INSERT INTO person VALUES ((SELECT MAX(userid) FROM user),'" + imie + "','" + nazwisko + "')");
                     Client.request("INSERT INTO corporation VALUES ((SELECT MAX(userid) FROM user),'" + corp + "','" + reg + "')");
+
+                    tmp = Client.request("SELECT MAX(userid) FROM user");
+                    tmp.first();
+
+                    this.senderId = Integer.parseInt(tmp.getString(1));
                 }
             }
             catch (SQLException e)
@@ -64,8 +70,8 @@ public class Sender extends Person {
     }
 
     public Pack sendPackage(String name, String country, String details, String zipCode, String city, String tel, //dotąd dane odbiorcy
-                            int serviceId, int weightId, int amount, int paymentId, int statusId, boolean paid, //dane dla paczki
-                            String... mail)  //pole opcjonalne mail
+                            int serviceId, int weightId, int amount, int paymentId, int statusId, int paid, //dane dla paczki
+                            String... mail) throws NoCountryException //pole opcjonalne mail
     {
         //source id to adres klienta czyli user_id
         //return address też jest user_id
