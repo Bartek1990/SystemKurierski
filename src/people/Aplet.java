@@ -8,6 +8,7 @@ import java.util.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import exceptions.AlreadyInDbException;
 import netscape.javascript.JSObject;
 import java.lang.*;
 import java.sql.SQLException;
@@ -170,7 +171,14 @@ public class Aplet extends JApplet implements ActionListener
             int baseidInt = Integer.parseInt(mail.getText());
             int dataCountryIdInt = Integer.parseInt(dataCountryId.getText());
             int zipCodeInt = Integer.parseInt(zipCode.getText());
-            new Employee(login.getText(), password.getText(), forename.getText(), surename.getText(), empDate.getText(), earnings.getText(), baseidInt, workTime.getText(), nip.getText(), account.getText(), DataName.getText(), dataCountryIdInt, dataDetails.getText(), zipCodeInt, city.getText(), tel.getText(), mail.getText());
+            /*
+            try {
+                new Employee(login.getText(), password.getText(), forename.getText(), surename.getText(), empDate.getText(), earnings.getText(), baseidInt, workTime.getText(), nip.getText(), account.getText(), DataName.getText(), dataCountryIdInt, dataDetails.getText(), zipCodeInt, city.getText(), tel.getText(), mail.getText());
+            } catch (AlreadyInDbException e1) {
+                e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+            */
         }
+
     }
 }

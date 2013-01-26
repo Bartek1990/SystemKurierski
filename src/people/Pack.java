@@ -19,7 +19,6 @@ public class Pack
             CachedRowSetImpl tmp = Client.request("SELECT Max(shipmentid) FROM shipment");
             tmp.first();
             this.shipmentid = Integer.parseInt(tmp.getString(1)) + 1;
-            Client.request()
         }catch (Exception e){
            e.printStackTrace();
         }
