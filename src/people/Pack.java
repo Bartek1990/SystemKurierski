@@ -12,16 +12,14 @@ public class Pack
 	int size;
 	boolean priority;
 	String status;
-    public Pack(int userid, int dataid, int sourceid, int returnid, int serviceid, int weightid, int amount, int paymentid, String sdate, int statusid, boolean paid){
+    public Pack(int recipentId, int senderId, int serviceId, int weightId, int amount, int paymentId, int statusId, boolean paid)
+    {
 
 
-        try{
-            CachedRowSetImpl tmp = Client.request("SELECT Max(shipmentid) FROM shipment");
-            tmp.first();
-            this.shipmentid = Integer.parseInt(tmp.getString(1)) + 1;
-        }catch (Exception e){
-           e.printStackTrace();
-        }
+        Client.request("INSERT INTO `pds`.`shipment` (`shipmentid`, `dataid`, `sourceid`, `returnid`, `serviceid`, " +
+                "`weightid`, `amount`, `paymentid`, `sdate`, `ddate`, `statusid`, `paid`) VALUES (NULL, \'"+recipentId+"\', \'"+senderId+"\', \'"+senderId+"\'" +
+                ", \'"+serviceId+"\', \'"+weightId+"\', \'"+amount+"\', \'"+paymentId+"\', " +
+                "CURRENT_TIMESTAMP, '0000-00-00 00:00:00', \'"+statusId+"\', \'"+paid+"\');");
 
     }
     public Pack(int weight, String content, int size, boolean priority, String status)

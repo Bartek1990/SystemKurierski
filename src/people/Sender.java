@@ -7,7 +7,7 @@ import exceptions.AlreadyInDbException;
 import java.sql.SQLException;
 
 public class Sender extends Person {
-
+    int senderId;
     Sender(String login, String pass, String tel, String imie,
            String nazwisko, String nip, String adres, String kod,
            String kraj, String miasto, String mail, String corp, String reg) throws AlreadyInDbException
@@ -62,12 +62,23 @@ public class Sender extends Person {
     public void followPackage(int packageID) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
-    //tymczasowo void żeby nie wyrzucał błędu
-    //dane podawane przez tą funkcje to dane odbiorcy
-    public void sendPackage(String name, String country, String details, String zipCode, String city, String tel, String... mail)
+
+    public Pack sendPackage(String name, String country, String details, String zipCode, String city, String tel, //dotąd dane odbiorcy
+                            int serviceId, int weightId, int amount, int paymentId, int statusId, boolean paid, //dane dla paczki
+                            String... mail)  //pole opcjonalne mail
     {
-
-
-
+        //source id to adres klienta czyli user_id
+        //return address też jest user_id
+        Recipient nowy = null;
+        if(mail==null)
+        {
+           nowy =  new Recipient(name, country, details, zipCode, city, tel);
+        }
+        else
+        {
+            nowy = new Recipient(name, country, details, zipCode, city, tel, mail);
+        }
+        Pack nowa = new Pack(nowy.recipentId, this.senderId, serviceId, weightId, amount, paymentId, statusId, paid);
+        return nowa;
     }
 }
