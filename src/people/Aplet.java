@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import com.sun.rowset.*;
 
 // By uruchomić applet przeczytaj plik readme_applet.txt
+//
 public class Aplet extends JApplet implements ActionListener
 {
     private JButton callJSButton = null;
@@ -128,7 +129,7 @@ public class Aplet extends JApplet implements ActionListener
             mail = new JTextField("E-mail");
             baseid = new JTextField("baseid");
             dataCountryId =  new JTextField("dataCountryId");
-
+              //Ciekawiej się tego ułożyć nie dało?
             login.addMouseListener(new MouseAdapter(){@Override public void mouseClicked(MouseEvent e){login.setText("");}  });
             password.addMouseListener(new MouseAdapter(){@Override public void mouseClicked(MouseEvent e){password.setText("");}  });
             forename.addMouseListener(new MouseAdapter(){@Override public void mouseClicked(MouseEvent e){forename.setText("");}  });

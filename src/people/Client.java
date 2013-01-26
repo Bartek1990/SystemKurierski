@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.sql.*;
 import com.sun.rowset.*;
-
+// Komentarz!
 public class Client
 {
 

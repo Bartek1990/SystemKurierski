@@ -1,5 +1,5 @@
 package people;
-
+     //Kolejny komentarz
 import exceptions.AlreadyInDbException;
 
 public class Courier extends Employee {

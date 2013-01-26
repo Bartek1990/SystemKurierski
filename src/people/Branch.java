@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 /*
  * Server jest wielowątkowy. Jednak po odpowiedzi zamyka strumień klienta.
+ * Fajnie działa
  */
 public class Branch
 {
