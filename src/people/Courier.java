@@ -15,7 +15,7 @@ public class Courier extends Employee {
 
 
     }
-	public void setStatus(Package pack) {
+	public void setStatus(Pack pack) {
 
 	}
 

@@ -41,4 +41,8 @@ public class Pack
         this.serviceId = pack.serviceId;
         this.statusId = pack.statusId;
     }
+    void setParam(int weightId, int statusId, int paid)
+    {
+
+    }
 }

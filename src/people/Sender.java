@@ -76,9 +76,9 @@ public class Sender extends Person {
         //source id to adres klienta czyli user_id
         //return address też jest user_id
         Recipient nowy = null;
-        if(mail==null)
+        if(mail == null)
         {
-           nowy =  new Recipient(name, country, details, zipCode, city, tel);
+            nowy =  new Recipient(name, country, details, zipCode, city, tel);
         }
         else
         {

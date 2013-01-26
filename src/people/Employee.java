@@ -36,7 +36,7 @@ public class Employee extends Person{
                         ",\""+baseid+"\",\""+workTime+"\",\"0\",\""+nip+"\",\""+account+"\")");
 
                 tmp = Client.request("SELECT MAX(employeeid) FROM employee");
-                tmp.first();
+
 
                 this.employeeId = Integer.parseInt(tmp.getString(1));//tutaj odpowiedź z serwera.
             }
@@ -44,6 +44,41 @@ public class Employee extends Person{
             e.printStackTrace();
         }
 
+    }
+    //pracownik sprawdza paczkę zanim dotrze do kuriera  zwraca 0 jeżeli nie przeszła testu. Zwraca cenę jeżeli przeszła
+    public int checkPackage(Pack pack)
+    {
+        int price = 0;
+        //daj mi do 2 zmiennych poniższe parametry z pól tekstowych
+        int weight = 0;
+        int status = 0;
+        //weight: parsuj mi tu inta z pierwszego pola formularza
+        //status : pole rozwijane z wszystkimi możliwymi opcjami statusu, zwróć mi do tego id statusu.
+
+
+        CachedRowSetImpl tmp = Client.request("SELECT * FROM weight WHERE intervalf <= \'"+weight+"\' AND intervalt > \'"+weight+"\'");
+        try {
+
+            price = Integer.parseInt(tmp.getString("price"));
+            tmp = Client.request("SELECT * FROM shipment WHERE shipmentid=\'"+pack.shipmentId+"\'");
+
+
+            int serviceId = Integer.parseInt(tmp.getString("serviceid"));
+            int paymentId = Integer.parseInt(tmp.getString("paymentid"));
+
+            tmp = Client.request("SELECT * FROM payment WHERE paymentid=\'"+paymentId+"\'");
+            int payToPrice = Integer.parseInt(tmp.getString("price"));
+            price = price+(price*payToPrice);
+
+            tmp = Client.request("SELECT * FROM service WHERE serviceid=\'"+serviceId+"\'");
+            int procToPrice = Integer.parseInt(tmp.getString("price"));
+            price = price+(price*procToPrice);
+            //to już ostateczna cena
+
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        return price;
     }
     @Override
     public void followPackage(int packId) {
