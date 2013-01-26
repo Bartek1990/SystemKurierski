@@ -107,8 +107,8 @@ public class KlasaAplet extends JApplet{
     MyButton p0b1 = new MyButton("Lokalizuj paczkê",50,180,200,40,p0);
     MyButton p0b2 = new MyButton("Zaloguj",50,240,200,40,p0);
     MyButton p0b3 = new MyButton("Zarejestruj siê w systemie",50,300,200,40,p0);
-    MyButton p0b4 = new MyButton("Wyœlij paczkê",50,360,200,40,p0);
-    MyLabel p0l = new MyLabel("<html>Chcesz wys³aæ towar wymagaj¹cy specjalnego traktowania lub dorêczyæ przesy³kê na jutro, a przy tym mieæ mo¿liwoœæ œledzenia jej losów? Fast Pack dostarczy przesy³kê lub dokument w ka¿de miejsce na œwiecie.<br> SprawdŸ nas.<br><br>Fast Pack koncentruje siê na wybranych sektorach przemys³u, by nasi klienci mogli korzystaæ nie tylko z doœwiadczenia specjalistów w zakresie logistyki, ale tak¿e z ich wiedzy dotycz¹cej rynków. Opracowane przez nas, znakomite rozwi¹zania przeznaczone dla poszczególnych sektorów przemys³u daj¹ naszym klientom istotn¹ przewagê konkurencyjn¹.</html>",320,200,400,250,p0);
+    MyButton p0b4 = new MyButton("Wyślij paczkê",50,360,200,40,p0);
+    MyLabel p0l = new MyLabel("<html>Chcesz wysłać towar wymagający specjalnego traktowania lub doręczyć przesyłkę na jutro, a przy tym miał możliwość śledzenia jej losów? Fast Pack dostarczy przesyłkę lub dokument w każde miejsce na œwiecie.<br> SprawdŸ nas.<br><br>Fast Pack koncentruje siê na wybranych sektorach przemys³u, by nasi klienci mogli korzystaæ nie tylko z doœwiadczenia specjalistów w zakresie logistyki, ale tak¿e z ich wiedzy dotycz¹cej rynków. Opracowane przez nas, znakomite rozwi¹zania przeznaczone dla poszczególnych sektorów przemys³u daj¹ naszym klientom istotn¹ przewagê konkurencyjn¹.</html>",320,200,400,250,p0);
 
     /************** UTWORZENIE SKLADNIKOW OKNA LOGOWANIA **************/
 
@@ -117,9 +117,9 @@ public class KlasaAplet extends JApplet{
     MyLabel p1l1 = new MyLabel("Login: ",320,200,100,20,p1);
     MyLabel p1l2 = new MyLabel("Haslo: ",320,250,100,20,p1);
     MyLabel p1l3 = new MyLabel("Zalogowano!","GREEN");
-    MyLabel p1l4 = new MyLabel("Bl¹d logowania!","RED");
-    MyLabel p1l5 = new MyLabel("Wprowadzono niepoprawny login lub has³o",420,330,340,20);
-    MyButton p1b1 = new MyButton("Wróæ",50,180,200,40,p1);
+    MyLabel p1l4 = new MyLabel("Bląd logowania!","RED");
+    MyLabel p1l5 = new MyLabel("Wprowadzono niepoprawny login lub hasło",420,330,340,20);
+    MyButton p1b1 = new MyButton("Wróć",50,180,200,40,p1);
     MyButton p1b2 = new MyButton("OK",750,400,100,40,p1);
 
     /************** UTWORZENIE SKLADNIKOW OKNA LOKALIZOWANIA PACZKI DLA NIEZAREJESTROWANEGO **************/
@@ -147,34 +147,34 @@ public class KlasaAplet extends JApplet{
     MyLabel p3l5 = new MyLabel("Nazwisko nadawcy: ",320,340,150,20,p3);
     MyLabel p3l6 = new MyLabel("Adres nadawcy: ",320,370,150,20,p3);
 
-    MyLabel p3l7 = new MyLabel("B³¹d wysy³ki","RED");
-    MyLabel p3l8 = new MyLabel("Nie wype³niono wszystkich pól.",325,440,340,20);
+    MyLabel p3l7 = new MyLabel("Błąd wysyłki","RED");
+    MyLabel p3l8 = new MyLabel("Nie wypełniono wszystkich pól.",325,440,340,20);
     MyButton p3b1 = new MyButton("Anuluj",50,180,200,40,p3);
-    MyButton p3b2 = new MyButton("Wyœlij",750,390,100,40,p3);
+    MyButton p3b2 = new MyButton("Wyślij",750,390,100,40,p3);
 
     /************** UTWORZENIE SKLADNIKOW OKNA LOKALIZACJI PO ZNALEZIENIU PACZKI DLA NIEZALOGOWANEGO**************/
-    MyButton p4b1 = new MyButton("Odswie¿",750,400,100,40,p4);
-    MyButton p4b2 = new MyButton("Wróæ",50,180,200,40,p4);
+    MyButton p4b1 = new MyButton("Odswież",750,400,100,40,p4);
+    MyButton p4b2 = new MyButton("Wróć",50,180,200,40,p4);
     //MyLabel p4l = new MyLabel("tutaj bedzie wyswietlana lokazizacja paczki ale jeszcze nie wiem jak :P",320,200,400,20,p4);
-    //MyLabel p4l = new MyLabel("Data wys³ania:",320,200,400,20,p4);
+    //MyLabel p4l = new MyLabel("Data wysłania:",320,200,400,20,p4);
     //MyLabel p42 = new MyLabel("Data dostarczenia:",320,230,400,20,p4);
 
     /************** UTWORZENIE SKLADNIKOW OKNA WYSLANO DLA NIEZALOGOWANEGO**************/
 
     MyButton p5b1 = new MyButton("Wyslij kolejna",50,180,200,40,p5);
-    MyButton p5b2 = new MyButton("Menu g³ówne",50,240,200,40,p5);
-    MyLabel p5l = new MyLabel("Zlecenie zostalo wys³ane","GREEN",p5);
+    MyButton p5b2 = new MyButton("Menu główne",50,240,200,40,p5);
+    MyLabel p5l = new MyLabel("Zlecenie zostalo wysłane","GREEN",p5);
 
 
     /************** UTWORZENIE SKLADNIKOW OKNA GLOWNEGO ZALOGOWANEGO **************/
 
-    MyButton p6b1 = new MyButton("Lokalizuj paczkê",50,170,200,40,p6);
-    MyButton p6b4 = new MyButton("Wyœlij paczkê",50,220,200,40,p6);
+    MyButton p6b1 = new MyButton("Lokalizuj paczkę",50,170,200,40,p6);
+    MyButton p6b4 = new MyButton("Wyślij paczkę",50,220,200,40,p6);
     MyButton p6b5 = new MyButton("Historia",50,270,200,40,p6);
     MyButton p6b6 = new MyButton("Kontakty",50,320,200,40,p6);
     MyButton p6b2 = new MyButton("Wyloguj",50,370,200,40,p6);
-    MyButton p6b3 = new MyButton("Wyrejestruj siê z systemu",50,420,200,40,p6);
-    MyLabel p6l = new MyLabel("<html>Chcesz wys³aæ towar wymagaj¹cy specjalnego traktowania lub dorêczyæ przesy³kê na jutro, a przy tym mieæ mo¿liwoœæ œledzenia jej losów? Fast Pack dostarczy przesy³kê lub dokument w ka¿de miejsce na œwiecie.<br> SprawdŸ nas.<br><br>Fast Pack koncentruje siê na wybranych sektorach przemys³u, by nasi klienci mogli korzystaæ nie tylko z doœwiadczenia specjalistów w zakresie logistyki, ale tak¿e z ich wiedzy dotycz¹cej rynków. Opracowane przez nas, znakomite rozwi¹zania przeznaczone dla poszczególnych sektorów przemys³u daj¹ naszym klientom istotn¹ przewagê konkurencyjn¹.</html>",320,200,400,250,p6);
+    MyButton p6b3 = new MyButton("Wyrejestruj się z systemu",50,420,200,40,p6);
+    MyLabel p6l = new MyLabel("<html>Chcesz wysłać towar wymagający specjalnego traktowania lub doręczyć przesyłkę na jutro, a przy tym miał możliwość śledzenia jej losów? Fast Pack dostarczy przesyłkę lub dokument w każde miejsce na świecie.<br> SprawdŸ nas.<br><br>Fast Pack koncentruje siê na wybranych sektorach przemys³u, by nasi klienci mogli korzystaæ nie tylko z doœwiadczenia specjalistów w zakresie logistyki, ale tak¿e z ich wiedzy dotycz¹cej rynków. Opracowane przez nas, znakomite rozwi¹zania przeznaczone dla poszczególnych sektorów przemys³u daj¹ naszym klientom istotn¹ przewagê konkurencyjn¹.</html>",320,200,400,250,p6);
 
     /************** UTWORZENIE SKLADNIKOW OKNA REJESTRACJI **************/
 
@@ -209,15 +209,15 @@ public class KlasaAplet extends JApplet{
     MyLabel p7l16 = new MyLabel("NIP: ",320,380,150,20,p7);
 
 
-    MyLabel p7l7 = new MyLabel("Rejestracja przebieg³a pomyœlnie!","GREEN");
-    MyLabel p7l8 = new MyLabel("B³¹d podczas rejestracji!","RED");
-    MyLabel p7l9 = new MyLabel("Login nie jest unikalny lub nie wype³niono wszystkich pól.",325,450,340,20);
+    MyLabel p7l7 = new MyLabel("Rejestracja przebiegła pomyślnie!","GREEN");
+    MyLabel p7l8 = new MyLabel("Błąd podczas rejestracji!","RED");
+    MyLabel p7l9 = new MyLabel("Login nie jest unikalny lub nie wypełniono wszystkich pól.",325,450,340,20);
 
     /************** UTWORZENIE SKLADNIKOW OKNA WYSLANO DLA ZALOGOWANEGO **************/
 
     MyButton p8b1 = new MyButton("Wyslij kojena",50,180,200,40,p8);
-    MyButton p8b2 = new MyButton("Menu g³ówne",50,240,200,40,p8);
-    MyLabel p8l = new MyLabel("Zlecenie zostalo wys³ane","GREEN",p8);
+    MyButton p8b2 = new MyButton("Menu główne",50,240,200,40,p8);
+    MyLabel p8l = new MyLabel("Zlecenie zostalo wysłane","GREEN",p8);
 
 
 
@@ -226,13 +226,13 @@ public class KlasaAplet extends JApplet{
     MyLabel p9l2 = new MyLabel("imie odbiorcy: ",320,200,150,20,p9);
     MyLabel p9l3 = new MyLabel("nazwisko odbiorcy: ",320,240,150,20,p9);
     MyLabel p9l1 = new MyLabel("adres odbiorcy: ",320,280,150,20,p9);
-    MyLabel p9l4 = new MyLabel("B³¹d wysy³ki","RED");
-    MyLabel p9l5 = new MyLabel("Nie wype³niono wszystkich pól.",325,440,340,20);
+    MyLabel p9l4 = new MyLabel("Błąd wysyłki","RED");
+    MyLabel p9l5 = new MyLabel("Nie wypełniono wszystkich pól.",325,440,340,20);
     MyTextField p9tf1 =  new MyTextField(20,470,200,150,20,p9);
     MyTextField p9tf2 =  new MyTextField(20,470,240,150,20,p9);
     MyTextField p9tf3 =  new MyTextField(30,470,280,200,20,p9);
     MyButton p9b1 = new MyButton("Anuluj",50,180,200,40,p9);
-    MyButton p9b2 = new MyButton("Wyœlij",750,390,100,40,p9);
+    MyButton p9b2 = new MyButton("Wyślij",750,390,100,40,p9);
 
 
     /************** UTWORZENIE SKLADNIKOW OKNA HISTORII **************/
@@ -242,9 +242,9 @@ public class KlasaAplet extends JApplet{
     MyList lista1 = new MyList(modellisty1);
     MyScroll scroll1 = new MyScroll(lista1,p10);
 
-    MyButton p10b = new MyButton("Wróæ",50,180,200,40,p10);
-    MyButton p10b2 = new MyButton("Usuñ",50,230,200,40,p10);
-    MyButton p10b3 = new MyButton("Usuñ Wszystko",50,280,200,40,p10);
+    MyButton p10b = new MyButton("Wróć",50,180,200,40,p10);
+    MyButton p10b2 = new MyButton("Usuń",50,230,200,40,p10);
+    MyButton p10b3 = new MyButton("Usuń Wszystko",50,280,200,40,p10);
 
     /************** UTWORZENIE SKLADNIKOW OKNA KONTAKTOW **************/
 
@@ -254,19 +254,19 @@ public class KlasaAplet extends JApplet{
 
     MyLabel p11l1 = new MyLabel("Czy napewno chcesz usunac kontakt??",325,440,300,20);
     MyLabel p11l2 = new MyLabel("Kontakt usuniety!","GREEN");
-    MyLabel p11l3 = new MyLabel("Pomyœlnie dodano nowy kontakt!","GREEN");
-    MyButton p11b1 = new MyButton("Wróæ",50,180,200,40,p11);
+    MyLabel p11l3 = new MyLabel("Pomyślnie dodano nowy kontakt!","GREEN");
+    MyButton p11b1 = new MyButton("Wróć",50,180,200,40,p11);
     MyButton p11b2 = new MyButton("Dodaj kontakt",50,240,200,40,p11);
-    MyButton p11b3 = new MyButton("Usuñ kontakt",50,300,200,40,p11);
+    MyButton p11b3 = new MyButton("Usuń kontakt",50,300,200,40,p11);
     MyButton p11b4 = new MyButton("TAK",730,430,80,40,p11);
     MyButton p11b5 = new MyButton("NIE",830,430,80,40,p11);
 
     /************** UTWORZENIE SKLADNIKOW OKNA DODAWANIA KONTAKTU **************/
-    MyLabel p12l01 = new MyLabel("B³¹d podczas dodawania kontaktu!","RED");
-    MyLabel p12l02 = new MyLabel("Nie wype³niono wszystkich pól.",325,450,340,20);
+    MyLabel p12l01 = new MyLabel("Błąd podczas dodawania kontaktu!","RED");
+    MyLabel p12l02 = new MyLabel("Nie wypełniono wszystkich pól.",325,450,340,20);
 
     MyButton p12b1 = new MyButton("Dodaj",750,390,100,40,p12);
-    MyButton p12b2 = new MyButton("Wróæ",50,180,200,40,p12);
+    MyButton p12b2 = new MyButton("Wróć",50,180,200,40,p12);
 
     JTextField p12tf1 = new MyTextField(20,470,200,150,20,p12);
     JTextField p12tf2 = new MyTextField(20,470,230,150,20,p12);
@@ -305,20 +305,20 @@ public class KlasaAplet extends JApplet{
 
     /************** UTWORZENIE SKLADNIKOW OKNA WYREJESTROWANIA ZAREJESTROWANEGO **************/
 
-    MyLabel p15l1 = new MyLabel("USUNIÊCIE KONTA","GREEN",p15);
-    MyLabel p15l2 = new MyLabel("KONTO ZOSTA£O USUNIETE","RED");
-    MyLabel p15l3 = new MyLabel("<html>Pamiêtaj ¿e usuniêcie konta spowodujê utratê twoich danych takich jak kontakty oraz historia.</html>",300,230,400,50,p15);
+    MyLabel p15l1 = new MyLabel("USUNIĘCIE KONTA","GREEN",p15);
+    MyLabel p15l2 = new MyLabel("KONTO ZOSTAŁO USUNIETE","RED");
+    MyLabel p15l3 = new MyLabel("<html>Pamiętaj że usuniêcie konta spowoduję utratę twoich danych takich jak kontakty oraz historia.</html>",300,230,400,50,p15);
     MyButton p15b1 = new MyButton("Akceptuje",345,340,200,40,p15);
-    MyButton p15b2 = new MyButton("Wróæ",50,180,200,40,p15);
-    JCheckBox p15cb1 = new JCheckBox("Chcê usun¹æ swoje konto.");
+    MyButton p15b2 = new MyButton("Wróć",50,180,200,40,p15);
+    JCheckBox p15cb1 = new JCheckBox("Chcê usunął swoje konto.");
 
     public KlasaAplet()
     {
         /********************** DODANIE SKLADNIKOW DO OKNA GLOWNEGO **********************/
         //// dodanie do list  na potrzeby testowania
         modellisty1.Add("12-03-12 : Dong Xuan 31-516 Kraków, Mogilska 18 ");
-        modellisty1.Add("15-06-12 : Chiñski Pa³ac Kraków, Miko³ajska");
-        modellisty1.Add("08-10-12 : Dong Hung 31-146 Kraków, D³uga 50");
+        modellisty1.Add("15-06-12 : Chiński Pałac Kraków, Mikołajska");
+        modellisty1.Add("08-10-12 : Dong Hung 31-146 Kraków, Długa 50");
         modellisty1.Add("3 opcja");
         modellisty1.Add("3 opcja");
         modellisty1.Add("3 opcja");
@@ -508,7 +508,7 @@ public class KlasaAplet extends JApplet{
                         add(p4);
 
                         //dodalem
-                        MyLabel p4l = new MyLabel(("Data wys³ania : " + crsi.getString("sdate")),320,200,400,20,p4);
+                        MyLabel p4l = new MyLabel(("Data wysłania : " + crsi.getString("sdate")),320,200,400,20,p4);
                         MyLabel p42 = new MyLabel(("Data dostarczenia : " + crsi.getString("ddate")),320,230,400,20,p4);
                     }
                     else

@@ -95,13 +95,7 @@ public class TableDisplay {
         return currentRow;
     }
 
-    public static void main(String[] args){
-        TableDisplay tableDisplay = new TableDisplay("user");
-        System.out.println(tableDisplay.getColumnHeads());
-        System.out.println(tableDisplay.getRows());
 
-
-    }
 
 
 }
