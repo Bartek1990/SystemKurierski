@@ -1,40 +1,49 @@
 package people;
 
 import com.sun.rowset.CachedRowSetImpl;
+import exceptions.AlreadyInDbException;
 
 import java.sql.SQLException;
 
 public class Employee extends Person{
 
     int employeeId;
-    Employee(Employee pracownik)
+    Employee(Employee pracownik) throws AlreadyInDbException
     {
         this.employeeId = pracownik.employeeId;
     }
     Employee(String login, String password, String forename, String surename,
               String empDate, String earnings, int baseid, String workTime, String nip,
-              String account, String DataName, int dataCountryId, String dataDetails, int zipCode, String city, String tel, String mail)
-    {
+              String account, String DataName, int dataCountryId, String dataDetails, String zipCode, String city, String tel, String mail) throws AlreadyInDbException {
 
         try {
-            Client.request("INSERT INTO data VALUES" +
-                    "(0,\""+DataName+"\",\""+dataCountryId+"\",\""+dataDetails+"\",\""+zipCode+"\",\""+city+"\",\""+tel+"\",\""+mail+"\")");
+            if(Client.request("SELECT * FROM employee WHERE login = '" + login + "'").first())
+            {
+                throw new AlreadyInDbException();
+            }
+            else
+            {
 
-            CachedRowSetImpl tmp = Client.request("SELECT MAX(dataid) FROM data");
-            tmp.first();
-            int dataId = Integer.parseInt(tmp.getString(1));
+                Client.request("INSERT INTO data VALUES" +
+                        "(0,\""+DataName+"\",\""+dataCountryId+"\",\""+dataDetails+"\",\""+zipCode+"\",\""+city+"\",\""+tel+"\",\""+mail+"\")");
 
-            Client.request("INSERT INTO employee VALUES \" +\n" +
-                    "\"(0,\""+login+"\",\""+password+"\",\""+forename+"\",\""+surename+"\",\""+dataId+"\",\""+empDate+"\",\""+earnings+"\"" +
-                    ",\""+baseid+"\",\""+workTime+"\",\"false\",\""+nip+"\",\""+account+"\")");
+                CachedRowSetImpl tmp = Client.request("SELECT MAX(dataid) FROM data");
+                tmp.first();
+                int dataId = Integer.parseInt(tmp.getString(1));
 
-            tmp = Client.request("SELECT MAX(employeeid) FROM employee");
-            tmp.first();
+                Client.request("INSERT INTO employee VALUES " +
+                        "(0,\""+login+"\",\""+password+"\",\""+forename+"\",\""+surename+"\",\""+dataId+"\",\""+empDate+"\",\""+earnings+"\"" +
+                        ",\""+baseid+"\",\""+workTime+"\",\"0\",\""+nip+"\",\""+account+"\")");
 
-            this.employeeId = Integer.parseInt(tmp.getString(1));//tutaj odpowiedź z serwera.
+                tmp = Client.request("SELECT MAX(employeeid) FROM employee");
+                tmp.first();
+
+                this.employeeId = Integer.parseInt(tmp.getString(1));//tutaj odpowiedź z serwera.
+            }
         } catch (SQLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
+
     }
     @Override
     public void followPackage(int packId) {
