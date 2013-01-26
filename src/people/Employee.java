@@ -41,13 +41,13 @@ public class Employee extends Person{
                 this.employeeId = Integer.parseInt(tmp.getString(1));//tutaj odpowiedź z serwera.
             }
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
 
     }
     @Override
     public void followPackage(int packId) {
-        //To change body of implemented methods use File | Settings | File Templates.
+
 
     }
 }

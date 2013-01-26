@@ -10,6 +10,7 @@ public class Courier extends Employee {
     public Courier(Employee courier) throws AlreadyInDbException {
         super(courier);
 
+
     }
 	public void setStatus(Package pack) {
 
