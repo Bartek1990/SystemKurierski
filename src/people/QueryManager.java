@@ -19,7 +19,6 @@ public class QueryManager implements Runnable
     {
         System.out.println("Wątek uruchomiony");
         this.socket = socket;
-        //this.trans = trans;
         Thread t = new Thread(this);
         t.start();
 

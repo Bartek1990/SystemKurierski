@@ -34,6 +34,7 @@ public class GUI {
     private JTextField textField17;
 
     public GUI() {
+        /*
         zarejestrujButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -44,5 +45,6 @@ public class GUI {
 
             }
         });
+    */
     }
 }

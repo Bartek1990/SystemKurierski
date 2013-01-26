@@ -1,162 +1,217 @@
-CREATE DATABASE PDS;
-USE PDS;
+CREATE TABLE IF NOT EXISTS `country` (
+  `countryid` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`countryid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
-CREATE TABLE USER
-(
-userid int unsigned not null auto_increment primary key,
-login varchar(30) not null,
-password varchar(50) not null,
-dataid int not null,
-nip numeric(10)
-);
+CREATE TABLE IF NOT EXISTS `temp` (
+  `tekst` varchar(20) NOT NULL,
+  `numer_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`numer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
-CREATE TABLE DATA
-(
-dataid int not null auto_increment primary key,
-name varchar(100),
-countryid int not null,
-details varchar(200) not null,
-zipcode int not null,
-city varchar(50) not null,
-tel varchar(16) not null,
-mail varchar(40)
-);
+CREATE TABLE IF NOT EXISTS `service` (
+  `serviceid` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(100) NOT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`serviceid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
-CREATE TABLE COUNTRY
-(
-countryid int not null auto_increment primary key,
-name varchar(50) not null
-);
+CREATE TABLE IF NOT EXISTS `payment` (
+  `paymentid` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(50) NOT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`paymentid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
-CREATE TABLE PERSON
-(
-userid int not null,
-forename varchar(30) not null,
-surname varchar(30) not null
-);
+CREATE TABLE IF NOT EXISTS `status` (
+  `statusid` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(30) NOT NULL,
+  PRIMARY KEY (`statusid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
-CREATE TABLE CORPORATION
-(
-userid int not null,
-name varchar(100) not null,
-regon varchar(20) not null
-);
-
-CREATE TABLE ADDRESS_BOOK
-(
-userid int not null,
-dateid int not null,
-title varchar(100) not null
-);
-
-CREATE TABLE SHIPMENT
-(
-shipmentid int not null auto_increment primary key,
-dataid int not null,
-sourceid int not null,
-returnid int not null,
-serviceid int not null,
-weightid int not null,
-amount int not null,
-paymentid int not null,
-sdate timestamp not null,
-ddate timestamp,
-statusid int not null,
-paid boolean not null
-);
-
-CREATE TABLE PAYMENT
-(
-paymentid int not null auto_increment primary key,
-type varchar(50) not null,
-price numeric(10,2)
-);
-CREATE TABLE WEIGHT
-(
-weightid int auto_increment not null primary key,
-intervalf numeric(10,4) not null,
-intervalt numeric(10,4) not null,
-price numeric(10,2) not null
-);
-
-CREATE TABLE SERVICE
-(
-serviceid int  not null auto_increment primary key,
-type varchar(100) not null, 
-price numeric(10,2)
-);
-
-CREATE TABLE STATUS
-(
-statusid int not null auto_increment primary key,
-title varchar(30) not null
-);
-
-CREATE TABLE BASE_HISTORY
-(
-baseid int not null,
-shipmentid int not null,
-odate timestamp not null
-);
-
-CREATE TABLE BASE
-(
-baseid int not null auto_increment primary key,
-dataid int not null,
-headid int
-);
-
-CREATE TABLE EMPLOYEE
-(
-employeeid int not null auto_increment primary key,
-login varchar(30) not null,
-password varchar(50) not null,
-forename varchar(30) not null,
-surname varchar(30) not null,
-dataid int not null,
-empdate timestamp not null,
-earnings numeric(10,2) not null,
-baseid int,
-worktime varchar(100),
-available boolean not null,
-nip numeric(10) not null,
-account varchar(30)
-);
-
-CREATE TABLE COURIER_HISTORY 
-(
-courierid int not null,
-shipmentid int not null,
-date timestamp not null,
-oncar boolean not null,
-delivered boolean not null
-);
-
-CREATE TABLE COURIER
-(
-empolyeeid int not null,
-location_x varchar(100),
-location_y varchar(100),
-tel varchar(16) not null
-);
-CREATE TABLE OPERATOR_HISTORY
-(
-operatorid int not null,
-shipmentid int not null,
-date timestamp not null
-);
+CREATE TABLE IF NOT EXISTS `data` (
+  `dataid` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `countryid` int(11) NOT NULL,
+  `details` varchar(200) NOT NULL,
+  `zipcode` varchar(11) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `tel` varchar(16) NOT NULL,
+  `mail` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`dataid`) ,
+  FOREIGN KEY (`countryid`)
+  REFERENCES `country`(countryid)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 
-CREATE TABLE OPERATOR
-(
-operatorid int not null auto_increment primary key,
-employeeid int not null,
-tel varchar(16) not null
-);
+CREATE TABLE IF NOT EXISTS `user` (
+  `userid` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `login` varchar(30) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `dataid` int(11) NOT NULL,
+  `nip` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`userid`),
+  UNIQUE KEY `userid` (`userid`) ,
+  FOREIGN Key (`dataid`)
+  REFERENCES data(dataid)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
-CREATE TABLE PLACE
-(
-userid int not null,
-dataid int not null,
-title varchar(100)
-);
+
+CREATE TABLE IF NOT EXISTS `person` (
+  `userid` int(11) unsigned NOT NULL,
+  `forename` varchar(30) NOT NULL,
+  `surname` varchar(30) NOT NULL,
+  FOREIGN KEY (userid)
+  REFERENCES USER(userid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `place` (
+  `userid` int(11) unsigned NOT NULL,
+  `dataid` int(11) NOT NULL,
+  `title` varchar(100) DEFAULT NULL  ,
+  FOREIGN KEY (`userid`)
+  references   `user`(`userid`),
+  FOREIGN KEY (dataid)
+  references data(dataid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `corporation` (
+  `userid` int(11) unsigned NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `regon` varchar(20) NOT NULL,
+FOREIGN KEY (userid)
+  REFERENCES USER(userid)
+  
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `weight` (
+  `weightid` int(11) NOT NULL AUTO_INCREMENT,
+  `intervalf` decimal(10,4) NOT NULL,
+  `intervalt` decimal(10,4) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`weightid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `base` (
+  `baseid` int(11) NOT NULL AUTO_INCREMENT,
+  `dataid` int(11) NOT NULL,
+  `headid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`baseid`),
+  FOREIGN KEY (dataid)
+  REFERENCES data(dataid)
+  
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `address_book` (
+  `userid` int(11) unsigned NOT NULL,
+  `dataid` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  FOREIGN KEY (`userid`)
+  references   `user`(`userid`),
+  FOREIGN KEY (dataid)
+  references data(dataid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `employee` (
+  `employeeid` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(30) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `forename` varchar(30) NOT NULL,
+  `surname` varchar(30) NOT NULL,
+  `dataid` int(11) NOT NULL,
+  `empdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `earnings` decimal(10,2) NOT NULL,
+  `baseid` int(11) DEFAULT NULL,
+  `worktime` varchar(100) DEFAULT NULL,
+  `available` tinyint(1) NOT NULL,
+  `nip` decimal(10,0) NOT NULL,
+  `account` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`employeeid`) ,
+ FOREIGN KEY (dataid)
+  REFERENCES data(dataid),
+   FOREIGN KEY (baseid)
+  REFERENCES base(baseid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `operator` (
+  `operatorid` int(11) NOT NULL AUTO_INCREMENT,
+  `employeeid` int(11) NOT NULL,
+  `tel` varchar(16) NOT NULL,
+  PRIMARY KEY (`operatorid`) ,
+   FOREIGN KEY (employeeid)
+  REFERENCES employee(employeeid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `courier` ( 
+  `courierid` int(11)    NOT NULL AUTO_INCREMENT,
+  `empolyeeid` int(11) NOT NULL,
+  `location_x` varchar(100) DEFAULT NULL,
+  `location_y` varchar(100) DEFAULT NULL,
+  `tel` varchar(16) NOT NULL ,
+   PRIMARY KEY (`courierid`) ,
+  FOREIGN KEY (empolyeeid)
+  REFERENCES employee(employeeid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `shipment` (
+  `shipmentid` int(11) NOT NULL AUTO_INCREMENT,
+  `dataid` int(11) NOT NULL,
+  `sourceid` int(11) NOT NULL,
+  `returnid` int(11) NOT NULL,
+  `serviceid` int(11) NOT NULL,
+  `weightid` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `paymentid` int(11) NOT NULL,
+  `sdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ddate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `statusid` int(11) NOT NULL,
+  `paid` tinyint(1) NOT NULL,
+  PRIMARY KEY (`shipmentid`) ,
+ FOREIGN KEY (dataid)
+  REFERENCES data(dataid),
+  FOREIGN KEY (serviceid)
+  REFERENCES service(serviceid),
+    FOREIGN KEY (weightid)
+  REFERENCES weight(weightid),
+    FOREIGN KEY (paymentid)
+  REFERENCES payment(paymentid),
+    FOREIGN KEY (statusid)
+  REFERENCES status(statusid)
+  
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+   CREATE TABLE IF NOT EXISTS `operator_history` (
+  `operatorid` int(11) NOT NULL,
+  `shipmentid` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+    FOREIGN KEY (operatorid)
+  REFERENCES operator(operatorid),
+    FOREIGN KEY (shipmentid)
+  REFERENCES shipment(shipmentid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `base_history` (
+  `baseid` int(11) NOT NULL,
+  `shipmentid` int(11) NOT NULL,
+  `odate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+   FOREIGN KEY (shipmentid)
+  REFERENCES shipment(shipmentid),
+  FOREIGN KEY (baseid)
+  REFERENCES base(baseid)
+  
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `courier_history` (
+  `courierid` int(11) NOT NULL,
+  `shipmentid` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `oncar` tinyint(1) NOT NULL,
+  `delivered` tinyint(1) NOT NULL  ,
+   FOREIGN KEY (shipmentid)
+  REFERENCES shipment(shipmentid),
+   FOREIGN KEY (courierid)
+  REFERENCES courier(courierid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
