@@ -2,6 +2,7 @@ package people;
 
 
 import com.sun.rowset.CachedRowSetImpl;
+import exceptions.AlreadyInDbException;
 
 import java.sql.SQLException;
 
@@ -9,30 +10,29 @@ public class Sender extends Person {
 
     Sender(String login, String pass, String tel, String imie,
            String nazwisko, String nip, String adres, String kod,
-           String kraj, String miasto, String mail, String corp, String reg)
+           String kraj, String miasto, String mail, String corp, String reg) throws AlreadyInDbException
     {
         if (login.equals("") || pass.equals("") || imie.equals("") ||
                 nazwisko.equals("") || nip.equals("") || adres.equals("") ||
                 kod.equals("") || miasto.equals("") || kraj.equals("") || tel.equals("") || mail.equals("") ||
                 corp.equals("") || reg.equals("") )
         {
-            //rzuć błąd
+            //rzuć coś
 
         }
         else
         {
             try
             {
-                if(Client.request("select * from user where login = '" + login + "'").first())
+                if(Client.request("SELECT * FROM user WHERE login = '" + login + "'").first())
                 {
-                    //rzuć błąd bo jest już w bazie
+                    throw new AlreadyInDbException();
                 }
                 else
                 {
-
                     String krajid = null;
                     //sprawdzenie czy podany kraj juz jest wpisany
-                    CachedRowSetImpl tmp = Client.request("select countryid from country where name = '" + kraj + "' limit 1");
+                    CachedRowSetImpl tmp = Client.request("SELECT countryid FROM country WHERE name = '" + kraj + "' LIMIT 1");
                     if(tmp.first())
                     {
                         krajid = tmp.getString(1);
@@ -42,15 +42,13 @@ public class Sender extends Person {
                         //rzuć brak takiego kraju w bazie
                     }
 
-                    Client.request("insert into data (name, countryid, details, zipcode, city, tel, mail) " +
-                            "values ('" + imie + " " + nazwisko + "'," + krajid + ",'" + adres + "','"
+                    Client.request("INSERT INTO data (name, countryid, details, zipcode, city, tel, mail) " +
+                            "VALUES ('" + imie + " " + nazwisko + "'," + krajid + ",'" + adres + "','"
                             + kod + "','" + miasto + "','" + tel + "','" + mail + "')");
                     //checkMessage(request("select max(countryid) from country"));
-                    Client.request("insert into user (login, password, dataid, nip) values ('" + login + "','" + pass + "',(select max(dataid) from data),'" + nip + "')");
-                    Client.request("insert into person values ((select max(userid) from user),'" + imie + "','" + nazwisko + "')");
-                    Client.request("insert into corporation values ((select max(userid) from user),'" + corp + "','" + reg + "')");
-
-
+                    Client.request("INSERT INTO user (login, password, dataid, nip) VALUES ('" + login + "','" + pass + "',(SELECT MAX(dataid) FROM data),'" + nip + "')");
+                    Client.request("INSERT INTO person VALUES ((SELECT MAX(userid) FROM user),'" + imie + "','" + nazwisko + "')");
+                    Client.request("INSERT INTO corporation VALUES ((SELECT MAX(userid) FROM user),'" + corp + "','" + reg + "')");
                 }
             }
             catch (SQLException e)
@@ -64,8 +62,12 @@ public class Sender extends Person {
     public void followPackage(int packageID) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
- /*   public Pack sendPackage(){
-        Pack pack;
-        return pack;
-    }         */
+    //tymczasowo void żeby nie wyrzucał błędu
+    //dane podawane przez tą funkcje to dane odbiorcy
+    public void sendPackage(String name, String country, String details, String zipCode, String city, String tel, String... mail)
+    {
+
+
+
+    }
 }

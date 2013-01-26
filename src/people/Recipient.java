@@ -1,6 +1,7 @@
 package people;
 
 public class Recipient extends Person {
+
     @Override
     public void followPackage(int packageID) {
 
