@@ -8,9 +8,7 @@ import java.sql.SQLException;
 
 public class TableDisplay {
     private JTable table;
-    private JPanel panel;
     ListTableModel model;
-    private JFrame frame;
     public TableDisplay(String tableName){
         ResultSet resultSet = Client.request("SELECT * FROM " + tableName);
         try {
@@ -25,25 +23,6 @@ public class TableDisplay {
     }
     public JTable getTable(){
         return table;
-    }
-    public JPanel createPanel(){
-
-        panel = new JPanel();
-        JScrollPane scrollPane = new JScrollPane( table );
-        panel.add(scrollPane);
-
-        JPanel buttonPanel = new JPanel();
-        panel.add(buttonPanel, BorderLayout.SOUTH);
-        return panel;
-    }
-    public JFrame createFrame(){
-        frame = new JFrame();
-        JScrollPane scrollPane = new JScrollPane( table );
-        frame.add(scrollPane);
-
-        JPanel buttonPanel = new JPanel();
-        frame.add(buttonPanel, BorderLayout.SOUTH);
-        return frame;
     }
 
     public static void main(String[] args){

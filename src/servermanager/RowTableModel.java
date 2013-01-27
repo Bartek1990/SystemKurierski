@@ -85,7 +85,7 @@ abstract class RowTableModel<T> extends AbstractTableModel
     {
         Boolean isEditable = null;
 
-        //  Check is column editability has been set
+
 
         if (column < isColumnEditable.length)
             isEditable = isColumnEditable[column];
@@ -112,17 +112,6 @@ abstract class RowTableModel<T> extends AbstractTableModel
         fireTableRowsInserted(row, row + rowList.size() - 1);
     }
 
-    public void insertRows(int row, T[] rowArray)
-    {
-        List<T> rowList = new ArrayList<T>(rowArray.length);
-
-        for (int i = 0; i < rowArray.length; i++)
-        {
-            rowList.add( rowArray[i] );
-        }
-
-        insertRows(row, rowList);
-    }
     public void setColumnClass(int column, Class columnClass)
     {
         columnClasses[column] = columnClass;

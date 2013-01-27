@@ -5,8 +5,7 @@
 package servermanager;
 
 
-import javax.swing.*;
-import java.awt.*;
+
 
 public class ServerManager extends javax.swing.JFrame {
 
@@ -42,7 +41,6 @@ public class ServerManager extends javax.swing.JFrame {
 
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
 
         jScrollPane1.setViewportView(jTable1);
 
@@ -112,6 +110,7 @@ public class ServerManager extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
+
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 
                 if ("Nimbus".equals(info.getName())) {
