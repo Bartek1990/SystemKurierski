@@ -13,7 +13,7 @@ import com.sun.rowset.CachedRowSetImpl;
 //tutaj mamy statyczna klase wewnetrzna z statycznymi metodami 
 //dostosowanymi do odpowiednich przyciskow z gui. 
 // funkcje nazywaja sie tak jak przyciski ktore je wywluja
-public abstract class MySql 
+public abstract class MySql
 {
 	public static class Do
 	{		

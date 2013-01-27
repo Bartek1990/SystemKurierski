@@ -1,101 +1,66 @@
 package servermanager;
 
-
-
-import people.JDBCConnection;
-
-import java.sql.*;
+import people.Client;
 import javax.swing.*;
-import java.util.*;
+import java.awt.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class TableDisplay {
-    private JDBCConnection dataBaseConnector = new JDBCConnection();
-
     private JTable table;
-    private String tableName = null;
-    Vector columnHeads = new Vector();
-    Vector rows = new Vector();
+    private JPanel panel;
+    ListTableModel model;
+    private JFrame frame;
+    public TableDisplay(String tableName){
+        ResultSet resultSet = Client.request("SELECT * FROM " + tableName);
+        try {
+            model = ListTableModel.createModelFromResultSet(resultSet);
+            table = new JTable(model);
+            //createPanel();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-    public TableDisplay(String tableName)
-    {
-        this.tableName = tableName;
-        getTable();
-        //show();
+
     }
-    public Vector getColumnHeads(){
-        return columnHeads;
-    }
-    public Vector getRows(){
-        return rows;
-    }
-    public JTable getTableP() {
+    public JTable getTable(){
         return table;
     }
+    public JPanel createPanel(){
 
-    void getTable()
-    {
-        ResultSet resultSet;
-        String query = "Select * FROM " + tableName;
-        try {
-            resultSet = dataBaseConnector.readDataBase(query);
-            displayResultSet( resultSet );
-        } catch (Exception e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+        panel = new JPanel();
+        JScrollPane scrollPane = new JScrollPane( table );
+        panel.add(scrollPane);
 
-
-
-
+        JPanel buttonPanel = new JPanel();
+        panel.add(buttonPanel, BorderLayout.SOUTH);
+        return panel;
     }
-    private void displayResultSet( ResultSet rs )
-            throws SQLException
-    {
-// pozycja pierwszego rekordu
-        boolean moreRecords = rs.next();
-// jeśli nie ma wyświetl wiadomość
-        if ( ! moreRecords ) {
-        }
+    public JFrame createFrame(){
+        frame = new JFrame();
+        JScrollPane scrollPane = new JScrollPane( table );
+        frame.add(scrollPane);
 
-        try {
-// uzyskaj nazwy kolumn
-            ResultSetMetaData rsmd = rs.getMetaData();
-
-            for ( int i = 1; i <= rsmd.getColumnCount(); ++i )
-                columnHeads.addElement(rsmd.getColumnName(i));
-            do {
-                rows.addElement(getNextRow(rs, rsmd));
-            } while ( rs.next() );
-
-            // table = new JTable(Collections.copy(new Vector(), rows), Collections.copy(new Vector(), columnHeads));      // Tu nie działa
-            table = new JTable(new Vector(rows), new Vector(columnHeads));   //A to działa a nie powinno!
-
-        }
-        catch ( SQLException sqlex ) {
-            sqlex.printStackTrace();
-        }
-    }
-    private Vector getNextRow( ResultSet rs,
-                               ResultSetMetaData rsmd )
-            throws SQLException
-    {
-        Vector currentRow = new Vector();
-
-        for ( int i = 1; i <= rsmd.getColumnCount(); ++i )
-            switch( rsmd.getColumnType( i ) ) {
-                case Types.VARCHAR:
-                    currentRow.addElement(rs.getString(i));
-                    break;
-                case Types.INTEGER:
-                    currentRow.addElement(rs.getLong(i));
-                    break;
-                default:
-                    System.out.println( "Type was: " +
-                            rsmd.getColumnTypeName( i ) );
-            }
-
-        return currentRow;
+        JPanel buttonPanel = new JPanel();
+        frame.add(buttonPanel, BorderLayout.SOUTH);
+        return frame;
     }
 
+    public static void main(String[] args){
+        TableDisplay tD = new TableDisplay("user");
+        JFrame frame = new JFrame("Menadżer Serwera");
+        JScrollPane scrollPane = new JScrollPane( tD.getTable() );
+        frame.add(scrollPane);
 
+        JPanel buttonPanel = new JPanel();
+        frame.add(buttonPanel, BorderLayout.SOUTH);
 
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setVisible(true);
 
+    }
+    public ListTableModel getModel(){
+        return model;
+    }
 }
+
