@@ -10,5 +10,4 @@ abstract class Person {
 
         }
     }
-    abstract public void followPackage(int packageID);
 }

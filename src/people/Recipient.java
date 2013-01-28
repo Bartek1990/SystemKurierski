@@ -3,11 +3,13 @@ package people;
 import com.sun.rowset.CachedRowSetImpl;
 import exceptions.NoCountryException;
 
+import java.security.PublicKey;
 import java.sql.SQLException;
 
 public class Recipient extends Person {
 
     int recipentId;
+    Pack recivedPack;
     public Recipient(String name, String country, String details, String zipCode, String city, String tel, String... mail) throws NoCountryException
     {
         String krajid = null;
@@ -42,15 +44,15 @@ public class Recipient extends Person {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
     }
-    @Override
-    public void followPackage(int packageID) {
-
-
+    public Recipient(int recipentId)
+    {
+        this.recipentId = recipentId;
     }
-    public boolean confirmPickup(Pack pack){
-        return false;
-    }
-    public void logIn(String login, String password){
 
+    public boolean confirmPickup(Courier courier)
+    {
+        this.recivedPack = courier.givePackToRecipent();
+        return true;
     }
+
 }

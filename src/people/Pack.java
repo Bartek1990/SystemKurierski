@@ -10,7 +10,7 @@ public class Pack
 	int weightId;
 	int serviceId;
 	int statusId;
-
+    int recipentId;
     //chciałbym żeby nikt nie znał konkretnych id, ma to być wyszukiwane programowo, dlatego tutaj tego nawet nie sprawdzam tylko ładuje do bazy!
     public Pack(int recipentId, int senderId, int serviceId, int weightId, int amount, int paymentId, int statusId, int paid)
     {
@@ -26,7 +26,7 @@ public class Pack
             this.weightId = weightId;
             this.serviceId = serviceId;
             this.statusId = statusId;
-
+            this.recipentId = recipentId;
         } catch (SQLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
