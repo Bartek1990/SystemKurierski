@@ -12,9 +12,11 @@ public class Employee extends Person{
     {
         this.employeeId = pracownik.employeeId;
     }
-    public Employee(String login, String password, String forename, String surename,
-              String empDate, String earnings, int baseid, String workTime, String nip,
-              String account, String DataName, int dataCountryId, String dataDetails, String zipCode, String city, String tel, String mail) throws AlreadyInDbException {
+
+    //dataCountryId będzie stałe ze względu na to, że obsługujemy tylko jeden kraj!
+    //baseid również będzie stałe dlatego że mamy tylko jedną placówkę
+    public Employee(String login, String password, String forename, String surename, String earnings, String workTime, String nip,
+              String account, String DataName, String dataDetails, String zipCode, String city, String tel, String mail) throws AlreadyInDbException {
 
         try {
             if(Client.request("SELECT * FROM employee WHERE login = '" + login + "'").first())
@@ -23,7 +25,8 @@ public class Employee extends Person{
             }
             else
             {
-
+                int dataCountryId = 12; // zmienić gdyby w bazie był inny wpis
+                int baseid = 1; //stałe dlatego że mamy tylko jedną placówkę
                 Client.request("INSERT INTO data VALUES" +
                         "(0,\""+DataName+"\",\""+dataCountryId+"\",\""+dataDetails+"\",\""+zipCode+"\",\""+city+"\",\""+tel+"\",\""+mail+"\")");
 
@@ -32,7 +35,7 @@ public class Employee extends Person{
                 int dataId = Integer.parseInt(tmp.getString(1));
 
                 Client.request("INSERT INTO employee VALUES " +
-                        "(0,\""+login+"\",\""+password+"\",\""+forename+"\",\""+surename+"\",\""+dataId+"\",\""+empDate+"\",\""+earnings+"\"" +
+                        "(0,\""+login+"\",\""+password+"\",\""+forename+"\",\""+surename+"\",\""+dataId+"\",CURRENT_TIMESTAMP,\""+earnings+"\"" +
                         ",\""+baseid+"\",\""+workTime+"\",\"0\",\""+nip+"\",\""+account+"\")");
 
                 tmp = Client.request("SELECT MAX(employeeid) FROM employee");

@@ -44,8 +44,6 @@ public class employeeGUI extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jTextField13 = new javax.swing.JTextField();
         jTextField14 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
-        jTextField16 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -73,10 +71,11 @@ public class employeeGUI extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 try {
-                    new Employee(jTextField1.getText(), jTextField2.getText() ,jTextField3.getText(), jTextField4.getText(),
-                                "a", jTextField5.getText() , Integer.parseInt(jTextField6.getText()), jTextField7.getText(),
-                             jTextField8.getText(), jTextField9.getText(), jTextField10.getText(), Integer.parseInt(jTextField11.getText()),
-                            jTextField12.getText(), jTextField13.getText(),jTextField14.getText(),jTextField15.getText(),jTextField16.getText());
+
+                    //jTextfield11,6  do wywalenia
+                    new Employee(jTextField1.getText(), jTextField2.getText() ,jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), jTextField6.getText(),
+                             jTextField7.getText(), jTextField8.getText(), jTextField9.getText(),
+                            jTextField10.getText(), jTextField11.getText(),jTextField12.getText(),jTextField13.getText(),jTextField14.getText());
                 } catch (AlreadyInDbException e1) {
                     e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
@@ -111,10 +110,6 @@ public class employeeGUI extends javax.swing.JFrame {
         jLabel1.setText("login");
 
         {
-
-
-
-
 
             jLabel3.setText("Imię");
 
@@ -325,8 +320,6 @@ public class employeeGUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;

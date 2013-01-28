@@ -69,13 +69,9 @@ public class Sender extends Person {
         }
     }
 
-    @Override
-    public void followPackage(int packageID) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
 
     public Pack sendPackage(String name, String country, String details, String zipCode, String city, String tel, //dotąd dane odbiorcy
-                            int serviceId, int weightId, int amount, int paymentId, int statusId, int paid, //dane dla paczki
+                       int serviceId, int weightId, int amount, int paymentId, int statusId, int paid, //dane dla paczki
                             String... mail) throws NoCountryException //pole opcjonalne mail
     {
         //source id to adres klienta czyli user_id

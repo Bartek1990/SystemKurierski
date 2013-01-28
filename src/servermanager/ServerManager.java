@@ -5,6 +5,7 @@
 package servermanager;
 
 
+import GUI2.employeeGUI;
 import people.Branch;
 
 import javax.swing.*;
@@ -16,6 +17,7 @@ public class ServerManager extends javax.swing.JFrame implements Runnable {
     boolean flag = false;
     JPanel jPanel1;
     JButton jButton1;
+    JButton jButton2;
     Thread t;
     public ServerManager() {
         setTitle("Menadżer Serwera");
@@ -63,7 +65,7 @@ public class ServerManager extends javax.swing.JFrame implements Runnable {
         jTable7 = new javax.swing.JTable(new TableDisplay("country").getModel());
         jScrollPane8 = new javax.swing.JScrollPane();
         jTable8 = new javax.swing.JTable(new TableDisplay("courier_history").getModel());
-
+        jScrollPane9 = new javax.swing.JScrollPane();
 
 
 
@@ -112,6 +114,18 @@ public class ServerManager extends javax.swing.JFrame implements Runnable {
 
         jTabbedPane1.addTab("Książka", jScrollPane8);
 
+        jTabbedPane1.addTab("Rejestruj", jScrollPane9);
+        jButton2 = new JButton("Rejestruj");
+        JViewport nowy = new JViewport();
+        nowy.add(jButton2);
+        jScrollPane9.setViewport(nowy);
+
+        jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new employeeGUI();
+            }
+        });
 
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -140,6 +154,7 @@ public class ServerManager extends javax.swing.JFrame implements Runnable {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
+
         try {
 
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -175,6 +190,7 @@ public class ServerManager extends javax.swing.JFrame implements Runnable {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
