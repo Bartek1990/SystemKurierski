@@ -14,7 +14,7 @@ public class Sender extends Person {
 
     }
 
-    Sender(String login, String pass, String tel, String imie,
+    public Sender(String login, String pass, String tel, String imie,
            String nazwisko, String nip, String adres, String kod,
            String kraj, String miasto, String mail, String corp, String reg) throws AlreadyInDbException, NoCountryException
     {

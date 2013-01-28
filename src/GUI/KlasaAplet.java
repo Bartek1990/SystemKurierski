@@ -1,5 +1,6 @@
 package GUI;
 import java.awt.Color;
+import people.Sender;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,9 +15,12 @@ import java.sql.SQLException;
 
 import com.grzesiek.sql.*;
 import com.sun.rowset.CachedRowSetImpl;
+import exceptions.AlreadyInDbException;
+import exceptions.NoCountryException;
+import people.Sender;
 
 /*NIE WIEM CZY TEN DUZY KOMENT NA DOLE JEST AKTUALNY BO SPORO POZMIENIALEM
- * LEPIEJ ZWRACAC UWAGE NA MA£E KOMENTARZE UMIESZCZONE W KODZIE - Brajan
+ * LEPIEJ ZWRACAC UWAGE NA MAŁE KOMENTARZE UMIESZCZONE W KODZIE - Brajan
  * 
  * na samym poczatku znajduje sie zmienna log
  * mowi ona apletowi czy uzytkownik jest zalogowany czy nie
@@ -30,7 +34,7 @@ import com.sun.rowset.CachedRowSetImpl;
  * zmiennej na true
  * 
  * i w funkcji swingGUI() jako pierwszy wyswietlany panel ustaw na p6
- * (funkcja add(p0) na samym pocz¹tku swingGUI)
+ * (funkcja add(p0) na samym początku swingGUI)
  * 
  *  dzialanie programu:
  *  najpierw tworzymy wszystkie oniekna - kazde jest opisane
@@ -76,8 +80,8 @@ public class KlasaAplet extends JApplet{
     boolean log = false;
     boolean kasowanie=false;
     Color kolortla = new Color(13,9,10);
-    //@@@@@@@@@ Grzesiek ciebie iteresuje tylko ta klasa, w innych nie wprowadzaj ¿adnych zmian
-    //@@@@@@@@@ jak siê to posypie to nie wiem czy siê po³ape z³orzyc to spowrotem
+    //@@@@@@@@@ Grzesiek ciebie iteresuje tylko ta klasa, w innych nie wprowadzaj żadnych zmian
+    //@@@@@@@@@ jak się to posypie to nie wiem czy się połape złorzyc to spowrotem
 	 /*  oznaczenia skladnikow:
 	  *  p- panele np p0, p8
 	  *  b - buttony np p0b1, p4b2
@@ -89,7 +93,7 @@ public class KlasaAplet extends JApplet{
     MyPanel p1 = new MyPanel(false);	//okno logowania
     MyPanel p2 = new MyPanel(false);	//okno wpisywania id paczki w celu wyszukania niezalogowany
     MyPanel p3 = new MyPanel(false);	//okno wysylania paczki przez niezarejestrowanego
-    MyPanel p4 = new MyPanel(false);	//okno wyswietlaj¹ce stan paczki dla niezarejestrowanego
+    MyPanel p4 = new MyPanel(false);	//okno wyswietlające stan paczki dla niezarejestrowanego
     MyPanel p5 = new MyPanel(false);	//okno wyslanej paczki niezalogowany
     MyPanel p6 = new MyPanel(true);	    //okno glowne dla zalogowanych
     MyPanel p7 = new MyPanel(false);	//okno rejestracji
@@ -99,16 +103,16 @@ public class KlasaAplet extends JApplet{
     MyPanel p11 = new MyPanel(true);	//okno kontaktow
     MyPanel p12 = new MyPanel(true);	//okno dodawania kontaktu
     MyPanel p13 = new MyPanel(true);	//okno wpisywania id paczki w celu wyszukania zalogowany
-    MyPanel p14 = new MyPanel(true);	//okno wyswietlaj¹ce stan paczki dla zarejestrowanego
+    MyPanel p14 = new MyPanel(true);	//okno wyswietlające stan paczki dla zarejestrowanego
     MyPanel p15 = new MyPanel(false);	//okno usuniecia konta
 
     /************** UTWORZENIE SKLADNIKOW OKNA GLOWNEGO **************/
 
-    MyButton p0b1 = new MyButton("Lokalizuj paczkê",50,180,200,40,p0);
+    MyButton p0b1 = new MyButton("Lokalizuj paczkę",50,180,200,40,p0);
     MyButton p0b2 = new MyButton("Zaloguj",50,240,200,40,p0);
-    MyButton p0b3 = new MyButton("Zarejestruj siê w systemie",50,300,200,40,p0);
-    MyButton p0b4 = new MyButton("Wyślij paczkê",50,360,200,40,p0);
-    MyLabel p0l = new MyLabel("<html>Chcesz wysłać towar wymagający specjalnego traktowania lub doręczyć przesyłkę na jutro, a przy tym miał możliwość śledzenia jej losów? Fast Pack dostarczy przesyłkę lub dokument w każde miejsce na œwiecie.<br> SprawdŸ nas.<br><br>Fast Pack koncentruje siê na wybranych sektorach przemys³u, by nasi klienci mogli korzystaæ nie tylko z doœwiadczenia specjalistów w zakresie logistyki, ale tak¿e z ich wiedzy dotycz¹cej rynków. Opracowane przez nas, znakomite rozwi¹zania przeznaczone dla poszczególnych sektorów przemys³u daj¹ naszym klientom istotn¹ przewagê konkurencyjn¹.</html>",320,200,400,250,p0);
+    MyButton p0b3 = new MyButton("Zarejestruj się w systemie",50,300,200,40,p0);
+    MyButton p0b4 = new MyButton("Wyślij paczkę",50,360,200,40,p0);
+    MyLabel p0l = new MyLabel("<html>Chcesz wysłać towar wymagający specjalnego traktowania lub doręczyć przesyłkę na jutro, a przy tym miał możliwość śledzenia jej losów? Fast Pack dostarczy przesyłkę lub dokument w każde miejsce na świecie.<br> Sprawdź nas.<br><br>Fast Pack koncentruje się na wybranych sektorach przemysłu, by nasi klienci mogli korzystać nie tylko z doświadczenia specjalistów w zakresie logistyki, ale także z ich wiedzy dotyczącej rynków. Opracowane przez nas, znakomite rozwiązania przeznaczone dla poszczególnych sektorów przemysłu dają naszym klientom istotną przewagę konkurencyjną.</html>",320,200,400,250,p0);
 
     /************** UTWORZENIE SKLADNIKOW OKNA LOGOWANIA **************/
 
@@ -174,7 +178,7 @@ public class KlasaAplet extends JApplet{
     MyButton p6b6 = new MyButton("Kontakty",50,320,200,40,p6);
     MyButton p6b2 = new MyButton("Wyloguj",50,370,200,40,p6);
     MyButton p6b3 = new MyButton("Wyrejestruj się z systemu",50,420,200,40,p6);
-    MyLabel p6l = new MyLabel("<html>Chcesz wysłać towar wymagający specjalnego traktowania lub doręczyć przesyłkę na jutro, a przy tym miał możliwość śledzenia jej losów? Fast Pack dostarczy przesyłkę lub dokument w każde miejsce na świecie.<br> SprawdŸ nas.<br><br>Fast Pack koncentruje siê na wybranych sektorach przemys³u, by nasi klienci mogli korzystaæ nie tylko z doœwiadczenia specjalistów w zakresie logistyki, ale tak¿e z ich wiedzy dotycz¹cej rynków. Opracowane przez nas, znakomite rozwi¹zania przeznaczone dla poszczególnych sektorów przemys³u daj¹ naszym klientom istotn¹ przewagê konkurencyjn¹.</html>",320,200,400,250,p6);
+    MyLabel p6l = new MyLabel("<html>Chcesz wysłać towar wymagający specjalnego traktowania lub doręczyć przesyłkę na jutro, a przy tym miał możliwość śledzenia jej losów? Fast Pack dostarczy przesyłkę lub dokument w każde miejsce na świecie.<br> Sprawdź nas.<br><br>Fast Pack koncentruje się na wybranych sektorach przemysłu, by nasi klienci mogli korzystać nie tylko z doświadczenia specjalistów w zakresie logistyki, ale także z ich wiedzy dotyczącej rynków. Opracowane przez nas, znakomite rozwiązania przeznaczone dla poszczególnych sektorów przemysłu dają naszym klientom istotną przewagę konkurencyjną.</html>",320,200,400,250,p6);
 
     /************** UTWORZENIE SKLADNIKOW OKNA REJESTRACJI **************/
 
@@ -299,18 +303,18 @@ public class KlasaAplet extends JApplet{
 
     /************** UTWORZENIE SKLADNIKOW OKNA LOKALIZACJI PO ZNALEZIENIU PACZKI DLA ZAREJESTROWANEGO **************/
 
-    MyButton p14b1 = new MyButton("Odswie¿",750,400,100,40,p14);
-    MyButton p14b2 = new MyButton("Wróæ",50,180,200,40,p14);
+    MyButton p14b1 = new MyButton("Odswież",750,400,100,40,p14);
+    MyButton p14b2 = new MyButton("Wróć",50,180,200,40,p14);
     MyLabel p14l = new MyLabel("tutaj bedzie wyswietlana lokazizacja paczki ale jeszcze nie wiem jak :P",320,200,400,20,p14);
 
     /************** UTWORZENIE SKLADNIKOW OKNA WYREJESTROWANIA ZAREJESTROWANEGO **************/
 
     MyLabel p15l1 = new MyLabel("USUNIĘCIE KONTA","GREEN",p15);
     MyLabel p15l2 = new MyLabel("KONTO ZOSTAŁO USUNIETE","RED");
-    MyLabel p15l3 = new MyLabel("<html>Pamiętaj że usuniêcie konta spowoduję utratę twoich danych takich jak kontakty oraz historia.</html>",300,230,400,50,p15);
+    MyLabel p15l3 = new MyLabel("<html>Pamiętaj że usunięcie konta spowoduję utratę twoich danych takich jak kontakty oraz historia.</html>",300,230,400,50,p15);
     MyButton p15b1 = new MyButton("Akceptuje",345,340,200,40,p15);
     MyButton p15b2 = new MyButton("Wróć",50,180,200,40,p15);
-    JCheckBox p15cb1 = new JCheckBox("Chcê usunął swoje konto.");
+    JCheckBox p15cb1 = new JCheckBox("Chcę usunął swoje konto.");
 
     public KlasaAplet()
     {
@@ -450,7 +454,7 @@ public class KlasaAplet extends JApplet{
         p1b2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
 
-                //@@@@@@@@@ METODA SPRAWDZAJ¥CA LOGIN I HASLO JESLI POPRAWNE USTAWIA ZMIENA "log" NA TRUE
+                //@@@@@@@@@ METODA SPRAWDZAJąCA LOGIN I HASLO JESLI POPRAWNE USTAWIA ZMIENA "log" NA TRUE
 
                 //log=true;
                 log = MySql.Do.p1b2(p1tf1.getText(), p1tf2.getText());
@@ -489,8 +493,8 @@ public class KlasaAplet extends JApplet{
             public void actionPerformed(ActionEvent e){
                 boolean znaleziono = false;
 
-                //@@@@@@@@@ METODA SPRAWDZAJ¥CA ID PACZKI, JESLI ISTNIEJE TO WYSWIETLA INFORMACJE O NIEJ NA PANELU "p4"
-                //@@@@@@@@@ I USTAWIA ZMIEN¥ "znaleziono" NA TRUE
+                //@@@@@@@@@ METODA SPRAWDZAJąCA ID PACZKI, JESLI ISTNIEJE TO WYSWIETLA INFORMACJE O NIEJ NA PANELU "p4"
+                //@@@@@@@@@ I USTAWIA ZMIENą "znaleziono" NA TRUE
 
                 CachedRowSetImpl crsi = MySql.Do.p2b2(p2tf.getText());
 
@@ -545,8 +549,8 @@ public class KlasaAplet extends JApplet{
             public void actionPerformed(ActionEvent e){
                 boolean wyslij = true;
 
-                //@@@@@@@@@ METODA WYSY£AJ¥CA NOW¥ PACZKE
-                //@@@@@@@@@ JEZELI NIE WYPE£NIONO WSZYSTKICH PÓL ZWRACA DLA ZMNIENIEJ
+                //@@@@@@@@@ METODA WYSYŁAJąCA NOWą PACZKE
+                //@@@@@@@@@ JEZELI NIE WYPEŁNIONO WSZYSTKICH PÓL ZWRACA DLA ZMNIENIEJ
                 //@@@@@@@@@ "wyslij" FALSE, JE¯ELI WSZYSTKO OK TO TRUE
 
                 if(wyslij)
@@ -570,7 +574,7 @@ public class KlasaAplet extends JApplet{
             public void actionPerformed(ActionEvent e){
                 /******** NIE OBSLUZONE ********/
 
-                //@@@@@@@@@ METODA ODSWIERZAJ¥CA STAN PACZKI NA PANELU P4
+                //@@@@@@@@@ METODA ODSWIERZAJąCA STAN PACZKI NA PANELU P4
                 //grzesiek - trzeba by to jakos obsluzyc zeby nie nakladalo napisow na siebie
                 //na razie nie wiem jak
 					
@@ -589,7 +593,7 @@ public class KlasaAplet extends JApplet{
 						{
 							//add(p4);
 							
-							MyLabel p4l = new MyLabel(("Data wys³ania : " + crsi.getString("sdate")),320,200,400,20,p4);
+							MyLabel p4l = new MyLabel(("Data wysłania : " + crsi.getString("sdate")),320,200,400,20,p4);
 							MyLabel p42 = new MyLabel(("Data dostarczenia : " + crsi.getString("ddate")),320,230,400,20,p4);
 						}
 						else
@@ -664,7 +668,7 @@ public class KlasaAplet extends JApplet{
             public void actionPerformed(ActionEvent e){
 
                 ////NIE RUSZAC///
-                log=false; // ZMIENA SYMULUJ¥CA WYLOGOWANIE
+                log=false; // ZMIENA SYMULUJąCA WYLOGOWANIE
                 login = null;
                 remove(p6);
                 add(p0);
@@ -698,7 +702,7 @@ public class KlasaAplet extends JApplet{
             public void actionPerformed(ActionEvent e){
 
 
-                //@@@@@@@@@ METODA WYŒWIETLAJ¥CA CAL¥ HISTORIE NA PANELU P10
+                //@@@@@@@@@ METODA WYśWIETLAJąCA CALą HISTORIE NA PANELU P10
 
                 // pojedynczy element histori dodasz przez funkcje modellisty1.Add(String);
 
@@ -713,7 +717,7 @@ public class KlasaAplet extends JApplet{
             public void actionPerformed(ActionEvent e){
 
 
-                //@@@@@@@@@ METODA WYŒWIETLAJ¥CA CAL¥ HISTORIE NA PANELU P11
+                //@@@@@@@@@ METODA WYśWIETLAJąCA CALą HISTORIE NA PANELU P11
 
                 // pojedynczy element histori dodasz przez funkcje modellisty2.Add(String);
                 CachedRowSetImpl tmp = MySql.Do.p6b6(login);
@@ -759,22 +763,29 @@ public class KlasaAplet extends JApplet{
             public void actionPerformed(ActionEvent e){
                 boolean zarejestrowano = false;
 
-                //@@@@@@@@@ METODA REJESTRUJ¥CA NOWEGO UZYTKOWNIKA
-                //@@@@@@@@@ JEZELI LOGIN NIE JEST UNIKANY LUB NIE WYPE£NIONO WSZYSTKICH PÓL ZWRACA DLA ZMNIENIEJ
+                //@@@@@@@@@ METODA REJESTRUJąCA NOWEGO UZYTKOWNIKA
+                //@@@@@@@@@ JEZELI LOGIN NIE JEST UNIKANY LUB NIE WYPEŁNIONO WSZYSTKICH PÓL ZWRACA DLA ZMNIENIEJ
                 //@@@@@@@@@ "zarejestrowano" FALSE, JE¯ELI WSZYSTKO OK TO TRUE
 
                 //zarejestrowano = MySql.Do.p7b2(p7tf1.getText(), p7tf2.getText(), p7tf3.getText(), p7tf4.getText(), p7tf5.getText(), p7tf6.getText());
-                zarejestrowano = MySql.Do.p7b2(p7tf1.getText(), p7tf2.getText(), p7tf3.getText(), p7tf4.getText(),
-                        p7tf5.getText(), p7tf16.getText(), p7tf10.getText(), p7tf11.getText(), p7tf13.getText(), p7tf12.getText(), //String nip, String adres, String kod,String miasto, String kraj, String tel,
-                        p7tf6.getText(), p7tf14.getText(), p7tf15.getText()//String corp, String reg
-                );
-
-                if(zarejestrowano) p7.add(p7l7);
-                else
-                {
+                //zarejestrowano = MySql.Do.p7b2(p7tf1.getText(), p7tf2.getText(), p7tf3.getText(), p7tf4.getText(),
+                     //   p7tf5.getText(), p7tf16.getText(), p7tf10.getText(), p7tf11.getText(), p7tf13.getText(), p7tf12.getText(), //String nip, String adres, String kod,String miasto, String kraj, String tel,
+                     //   p7tf6.getText(), p7tf14.getText(), p7tf15.getText()//String corp, String reg
+               // );
+                try {
+                    new Sender(p7tf1.getText(), p7tf2.getText(), p7tf3.getText(), p7tf4.getText(),
+                            p7tf5.getText(), p7tf10.getText(), p7tf11.getText(), p7tf13.getText(),
+                            p7tf6.getText(), p7tf12.getText(), p7tf16.getText(),  p7tf14.getText(), p7tf15.getText());
+                    p7.add(p7l7);
+                } catch (AlreadyInDbException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                     p7.add(p7l8);
                     p7.add(p7l9);
+                } catch (NoCountryException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
+
+
                 repaint();
                 validate();
             }
@@ -825,8 +836,8 @@ public class KlasaAplet extends JApplet{
             public void actionPerformed(ActionEvent e){
                 boolean wyslij = true;
 
-                //@@@@@@@@@ METODA WYSY£AJ¥CA NOW¥ PACZKE DLA ZALOGOWANEGO
-                //@@@@@@@@@ JEZELI NIE WYPE£NIONO WSZYSTKICH PÓL ZWRACA DLA ZMNIENIEJ
+                //@@@@@@@@@ METODA WYSYŁAJąCA NOWą PACZKE DLA ZALOGOWANEGO
+                //@@@@@@@@@ JEZELI NIE WYPEŁNIONO WSZYSTKICH PÓL ZWRACA DLA ZMNIENIEJ
                 //@@@@@@@@@ "WYSLIJ" FALSE, JE¯ELI WSZYSTKO OK TO TRUE
 
                 if(wyslij)
@@ -862,7 +873,7 @@ public class KlasaAplet extends JApplet{
                 modellisty1.remove(lista1);
 
 
-                //@@@@@@@@@ METODA USUWAJ¥CA ZAZNACZONY ELEMENT Z LISTY HISTORI ORAZ Z BAZY DANYCH
+                //@@@@@@@@@ METODA USUWAJąCA ZAZNACZONY ELEMENT Z LISTY HISTORI ORAZ Z BAZY DANYCH
 
             }
         });
@@ -872,7 +883,7 @@ public class KlasaAplet extends JApplet{
 
                 modellisty1.removeall();
 
-                //@@@@@@@@@ METODA USUWAJ¥CA CA£¥ HISTORE Z LISTY ORAZ Z BAZY DANYCH
+                //@@@@@@@@@ METODA USUWAJąCA CAŁą HISTORE Z LISTY ORAZ Z BAZY DANYCH
             }
         });
 
@@ -920,7 +931,7 @@ public class KlasaAplet extends JApplet{
         p11b4.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
 
-                //@@@@@@@@@ METODA USUWAJ¥CA WYBRANY KONTAKT Z LISTY ORAZ Z BAZY DANYCH
+                //@@@@@@@@@ METODA USUWAJąCA WYBRANY KONTAKT Z LISTY ORAZ Z BAZY DANYCH
                 p11.remove(p11b4);
                 p11.remove(p11b5);
                 p11.remove(p11l1);
@@ -951,7 +962,7 @@ public class KlasaAplet extends JApplet{
         p12b1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
 
-                //@@@@@@@@@ METODA DODAJ¥CA DO LISTY I BAZY DANYCH NOWY KONTAKT
+                //@@@@@@@@@ METODA DODAJąCA DO LISTY I BAZY DANYCH NOWY KONTAKT
 
                 boolean dodano = false;
 
@@ -1025,8 +1036,8 @@ public class KlasaAplet extends JApplet{
             public void actionPerformed(ActionEvent e){
                 boolean znaleziono = false;
 
-                //@@@@@@@@@ METODA SPRAWDZAJ¥CA ID PACZKI, JESLI ISTNIEJE TO WYSWIETLA INFORMACJE O NIEJ NA PANELU "p13"
-                //@@@@@@@@@ I USTAWIA ZMIEN¥ "znaleziono" NA TRUE
+                //@@@@@@@@@ METODA SPRAWDZAJąCA ID PACZKI, JESLI ISTNIEJE TO WYSWIETLA INFORMACJE O NIEJ NA PANELU "p13"
+                //@@@@@@@@@ I USTAWIA ZMIENą "znaleziono" NA TRUE
 
                 if(znaleziono)
                 {
@@ -1047,7 +1058,7 @@ public class KlasaAplet extends JApplet{
             public void actionPerformed(ActionEvent e){
                 /******** NIE OBSLUZONE ********/
 
-                //@@@@@@@@@ METODA ODSWIERZAJ¥CA STAN PACZKI NA PANELU P13
+                //@@@@@@@@@ METODA ODSWIERZAJąCA STAN PACZKI NA PANELU P13
             }
         });
 
@@ -1069,7 +1080,7 @@ public class KlasaAplet extends JApplet{
                 if(kasowanie)
                 {
 
-                    //@@@@@@@@@ METODA KASUJ¥CA KONTO
+                    //@@@@@@@@@ METODA KASUJąCA KONTO
                     p15.add(p15l2);
                 }
 
