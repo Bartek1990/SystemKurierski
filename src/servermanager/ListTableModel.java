@@ -73,7 +73,11 @@ public class ListTableModel extends RowTableModel<List>
             String columnLabel = metaData.getColumnLabel(i);
 
             if (columnLabel.equals(columnName))
+            {
+
                 columnNames.add( formatColumnName(columnName) );
+
+            }
             else
                 columnNames.add( columnLabel );
         }

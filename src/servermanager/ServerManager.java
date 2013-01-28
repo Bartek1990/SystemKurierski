@@ -5,14 +5,37 @@
 package servermanager;
 
 
+import people.Branch;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class ServerManager extends javax.swing.JFrame {
-
-
+public class ServerManager extends javax.swing.JFrame implements Runnable {
+    Branch oddzial;
+    boolean flag = false;
+    JPanel jPanel1;
+    JButton jButton1;
+    Thread t;
     public ServerManager() {
         setTitle("Menadżer Serwera");
-        initComponents();
+
+        jPanel1 = new JPanel();
+        jButton1 = new JButton("Start serwera");
+
+
+        jPanel1.add(jButton1);
+
+        getContentPane().add(jPanel1);
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                initComponents();
+            }
+        });
+
+
+
     }
 
 
@@ -21,9 +44,12 @@ public class ServerManager extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        JScrollPane jScrollPane1 = new JScrollPane();
+
+        t = new Thread(this);
+        t.start();
         jTable1 = new javax.swing.JTable(new TableDisplay("user").getModel());
-        jScrollPane2 = new javax.swing.JScrollPane();
+        JScrollPane jScrollPane2 = new JScrollPane();
         jTable2 = new javax.swing.JTable(new TableDisplay("employee").getModel());
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable(new TableDisplay("operator").getModel());
@@ -40,11 +66,14 @@ public class ServerManager extends javax.swing.JFrame {
 
 
 
+
+
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jScrollPane1.setViewportView(jTable1);
 
-
+        jTabbedPane1.addTab("USTAWIENIA", jPanel1);
         jTabbedPane1.addTab("Użytkownicy", jScrollPane1);
 
 
@@ -84,6 +113,7 @@ public class ServerManager extends javax.swing.JFrame {
         jTabbedPane1.addTab("Książka", jScrollPane8);
 
 
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,6 +128,7 @@ public class ServerManager extends javax.swing.JFrame {
         );
 
         pack();
+
     }// </editor-fold>
 
     /**
@@ -107,7 +138,7 @@ public class ServerManager extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
 
@@ -137,9 +168,7 @@ public class ServerManager extends javax.swing.JFrame {
             }
         });
     }
-    // Variables declaration - do not modify
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -155,6 +184,15 @@ public class ServerManager extends javax.swing.JFrame {
     private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable7;
     private javax.swing.JTable jTable8;
+
+    @Override
+    public void run() {
+        //To change body of implemented methods use File | Settings | File Templates.
+        jPanel1.remove(jButton1);
+        oddzial = new Branch();
+        oddzial.handleCon();
+    }
+
 
     // End of variables declaration
 }

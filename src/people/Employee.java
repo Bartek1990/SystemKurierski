@@ -12,7 +12,7 @@ public class Employee extends Person{
     {
         this.employeeId = pracownik.employeeId;
     }
-    Employee(String login, String password, String forename, String surename,
+    public Employee(String login, String password, String forename, String surename,
               String empDate, String earnings, int baseid, String workTime, String nip,
               String account, String DataName, int dataCountryId, String dataDetails, String zipCode, String city, String tel, String mail) throws AlreadyInDbException {
 
@@ -80,9 +80,5 @@ public class Employee extends Person{
         }
         return price;
     }
-    @Override
-    public void followPackage(int packId) {
 
-
-    }
 }
