@@ -42,9 +42,9 @@ public class Employee extends Person{
                         ",\""+baseid+"\",\""+workTime+"\",\"0\",\""+nip+"\",\""+account+"\")");
 
                 tmp = Client.request("SELECT MAX(employeeid) FROM employee");
+                tmp.first();
 
-
-                this.employeeId = Integer.parseInt(tmp.getString(1));//tutaj odpowiedź z serwera.
+                this.employeeId = Integer.parseInt(tmp.getString("MAX(employeeid)"));//tutaj odpowiedź z serwera.
             }
         } catch (SQLException e) {
             e.printStackTrace();
