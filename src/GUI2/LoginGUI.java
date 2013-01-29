@@ -3,6 +3,7 @@ package GUI2;
 
 import exceptions.AlreadyInDbException;
 import exceptions.NoCountryException;
+import people.Employee;
 import people.Sender;
 
 import java.awt.Dimension;
@@ -114,7 +115,7 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         try {
-            new Sender().logIn(jTextField1.getText(), jTextField2.getText());
+            new Employee().logIn(jTextField1.getText(), jTextField2.getText());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -8,6 +8,9 @@ import java.sql.SQLException;
 public class Employee extends Person{
 
     int employeeId;
+    public Employee(){
+
+    }
     Employee(Employee pracownik) throws AlreadyInDbException
     {
         this.employeeId = pracownik.employeeId;

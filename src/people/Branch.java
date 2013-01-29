@@ -6,8 +6,10 @@ import java.net.*;
  * Server jest wielowątkowy. Jednak po odpowiedzi zamyka strumień klienta.
  * Fajnie działa
  */
+
 public class Branch
 {
+    public int flaga=1;
     private ServerSocket server;
     private int port = 8867;
    // private Transaction trans;
@@ -23,7 +25,6 @@ public class Branch
             e.printStackTrace();
         }
     }
-
     public void handleCon()
     {
         System.out.println("Oczekiwanie na połączenie...");
@@ -39,9 +40,5 @@ public class Branch
             }
         }
     }
-    public static void main(String[] argh)
-    {
-        Branch oddzial = new Branch();
-        oddzial.handleCon();
-    }
+
 }

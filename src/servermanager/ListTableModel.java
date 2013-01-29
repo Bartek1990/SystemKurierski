@@ -63,7 +63,6 @@ public class ListTableModel extends RowTableModel<List>
         ResultSetMetaData metaData = resultSet.getMetaData();
         int columns = metaData.getColumnCount();
 
-        //  Create empty model using the column names
 
         ArrayList<String> columnNames = new ArrayList<String>();
 

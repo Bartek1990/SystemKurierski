@@ -6,14 +6,17 @@ import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class TableDisplay {
+public class TableDisplay extends JTable {
     private JTable table;
     ListTableModel model;
     public TableDisplay(String tableName){
         ResultSet resultSet = Client.request("SELECT * FROM " + tableName);
+
         try {
             model = ListTableModel.createModelFromResultSet(resultSet);
+
             table = new JTable(model);
+
             //createPanel();
         } catch (SQLException e) {
             e.printStackTrace();
