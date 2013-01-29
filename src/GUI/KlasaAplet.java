@@ -113,7 +113,7 @@ public class KlasaAplet extends JApplet{
     MyButton p0b2 = new MyButton("Zaloguj",50,240,200,40,p0);
     MyButton p0b3 = new MyButton("Zarejestruj się w systemie",50,300,200,40,p0);
     //MyButton p0b4 = new MyButton("Wyślij paczkę",50,360,200,40,p0);
-    MyLabel p0l = new MyLabel("<html>Chcesz wysłać towar wymagający specjalnego traktowania lub doręczyć przesyłkę na jutro, a przy tym miał możliwość śledzenia jej losów? Fast Pack dostarczy przesyłkę lub dokument w każde miejsce na świecie.<br> Sprawdź nas.<br><br>Fast Pack koncentruje się na wybranych sektorach przemysłu, by nasi klienci mogli korzystać nie tylko z doświadczenia specjalistów w zakresie logistyki, ale także z ich wiedzy dotyczącej rynków. Opracowane przez nas, znakomite rozwiązania przeznaczone dla poszczególnych sektorów przemysłu dają naszym klientom istotną przewagę konkurencyjną.</html>",320,200,400,250,p0);
+    MyLabel p0l = new MyLabel("<html>Chcesz wysłać towar wymagający specjalnego traktowania lub doręczyć przesyłkę na jutro, a przy tym miał możliwość śledzenia jej losów? Ddostarczymy przesyłkę lub dokument w każde miejsce na świecie.<br> Sprawdź nas.<br><br>Koncentrujemy się na wybranych sektorach przemysłu, by nasi klienci mogli korzystać nie tylko z doświadczenia specjalistów w zakresie logistyki, ale także z ich wiedzy dotyczącej rynków. Opracowane przez nas, znakomite rozwiązania przeznaczone dla poszczególnych sektorów przemysłu dają naszym klientom istotną przewagę konkurencyjną.</html>",320,200,400,250,p0);
 
     /************** UTWORZENIE SKLADNIKOW OKNA LOGOWANIA **************/
 
@@ -176,7 +176,7 @@ public class KlasaAplet extends JApplet{
     MyButton p6b1 = new MyButton("Lokalizuj paczkę",50,170,200,40,p6);
     MyButton p6b4 = new MyButton("Wyślij paczkę",50,220,200,40,p6);
     MyButton p6b5 = new MyButton("Historia",50,270,200,40,p6);
-    MyButton p6b6 = new MyButton("Kontakty",50,320,200,40,p6);
+    //MyButton p6b6 = new MyButton("Kontakty",50,320,200,40,p6);
     MyButton p6b2 = new MyButton("Wyloguj",50,370,200,40,p6);
     MyButton p6b3 = new MyButton("Wyrejestruj się z systemu",50,420,200,40,p6);
     MyLabel p6l = new MyLabel("<html>Chcesz wysłać towar wymagający specjalnego traktowania lub doręczyć przesyłkę na jutro, a przy tym miał możliwość śledzenia jej losów? Fast Pack dostarczy przesyłkę lub dokument w każde miejsce na świecie.<br> Sprawdź nas.<br><br>Fast Pack koncentruje się na wybranych sektorach przemysłu, by nasi klienci mogli korzystać nie tylko z doświadczenia specjalistów w zakresie logistyki, ale także z ich wiedzy dotyczącej rynków. Opracowane przez nas, znakomite rozwiązania przeznaczone dla poszczególnych sektorów przemysłu dają naszym klientom istotną przewagę konkurencyjną.</html>",320,200,400,250,p6);
@@ -228,14 +228,26 @@ public class KlasaAplet extends JApplet{
 
     /************** UTWORZENIE SKLADNIKOW OKNA WYSLIJ PACZKE DLA ZAREJESTROWANEGO USERA **************/
 
-    MyLabel p9l2 = new MyLabel("imie odbiorcy: ",320,200,150,20,p9);
-    MyLabel p9l3 = new MyLabel("nazwisko odbiorcy: ",320,240,150,20,p9);
-    MyLabel p9l1 = new MyLabel("adres odbiorcy: ",320,280,150,20,p9);
+    MyLabel ap9l1 = new MyLabel("recipentId",320,200,150,20,p9);
+    MyLabel ap9l2 = new MyLabel("senderId",320,240,150,20,p9);
+    MyLabel ap9l3 = new MyLabel("serviceId ",320,280,150,20,p9);
+    MyLabel ap9l4 = new MyLabel("weightId",320,320,150,20,p9);
+    MyLabel ap9l5 = new MyLabel("amount",320,360,150,20,p9);
+    MyLabel ap9l6 = new MyLabel("paymentId: ",320,400,150,20,p9);
+    MyLabel ap9l7 = new MyLabel("statusId",320,440,150,20,p9);
+    MyLabel ap9l8 = new MyLabel("paid",320,480,150,20,p9);
+
     MyLabel p9l4 = new MyLabel("Błąd wysyłki","RED");
     MyLabel p9l5 = new MyLabel("Nie wypełniono wszystkich pól.",325,440,340,20);
-    MyTextField p9tf1 =  new MyTextField(20,470,200,150,20,p9);
-    MyTextField p9tf2 =  new MyTextField(20,470,240,150,20,p9);
-    MyTextField p9tf3 =  new MyTextField(30,470,280,200,20,p9);
+    MyTextField ap9tf1 =  new MyTextField(20,470,200,150,20,p9);
+    MyTextField ap9tf2 =  new MyTextField(20,470,240,150,20,p9);
+    MyTextField ap9tf3 =  new MyTextField(30,470,280,200,20,p9);
+    MyTextField ap9tf4 =  new MyTextField(20,470,320,150,20,p9);
+    MyTextField ap9tf5 =  new MyTextField(20,470,360,150,20,p9);
+    MyTextField ap9tf6 =  new MyTextField(30,470,400,200,20,p9);
+    MyTextField ap9tf7 =  new MyTextField(20,470,440,150,20,p9);
+    MyTextField ap9tf8 =  new MyTextField(20,470,480,150,20,p9);
+;
     MyButton p9b1 = new MyButton("Anuluj",50,180,200,40,p9);
     MyButton p9b2 = new MyButton("Wyślij",750,390,100,40,p9);
 
@@ -707,7 +719,7 @@ public class KlasaAplet extends JApplet{
             }
         });
 
-        p6b6.addActionListener(new ActionListener(){
+        /*p6b6.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
 
 
@@ -735,7 +747,7 @@ public class KlasaAplet extends JApplet{
                 repaint();
                 validate();
             }
-        });
+        });   */
 
         /********** OBSLUGA PRZYCISKOW OKNA P7 **********/
 
@@ -792,9 +804,15 @@ public class KlasaAplet extends JApplet{
         p8b1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 ////NIE RUSZAC///
-                p9tf1.setText("");
-                p9tf2.setText("");
-                p9tf3.setText("");
+                ap9tf1.setText("");
+                ap9tf2.setText("");
+                ap9tf3.setText("");
+                ap9tf4.setText("");
+                ap9tf5.setText("");
+                ap9tf6.setText("");
+                ap9tf7.setText("");
+                ap9tf8.setText("");
+
                 p9.remove(p9l4);
                 p9.remove(p9l5);
                 remove(p8);
@@ -839,6 +857,7 @@ public class KlasaAplet extends JApplet{
 
                 if(wyslij)
                 {
+                    new Pack(Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()));
                     remove(p9);
                     add(p8);
                 }
@@ -974,7 +993,7 @@ public class KlasaAplet extends JApplet{
 					modellisty2.Add(pobranyKontakt);*/
 
                 modellisty2.removeAllElements();
-                p6b6.doClick();
+                //p6b6.doClick();
 
 
                 //////////////////////////////////////////////////
