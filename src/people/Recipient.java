@@ -6,7 +6,7 @@ import exceptions.NoCountryException;
 import java.security.PublicKey;
 import java.sql.SQLException;
 
-public class Recipient extends Person {
+public class Recipient {
 
     int recipentId;
     Pack recivedPack;
@@ -38,7 +38,7 @@ public class Recipient extends Person {
                         + zipCode + "','" + city + "','" + tel + "','" + mail + "')");
             }
             tmp = Client.request("SELECT MAX(dataid) FROM data");
-
+            tmp.first();
             this.recipentId = Integer.parseInt(tmp.getString(1));//tutaj odpowiedź z serwera.
         } catch (SQLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

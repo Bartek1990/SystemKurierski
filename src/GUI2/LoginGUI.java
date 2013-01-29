@@ -115,7 +115,7 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         try {
-            new Employee().logIn(jTextField1.getText(), jTextField2.getText());
+            new Employee().setID(jTextField1.getText(), jTextField2.getText());
         } catch (Exception e) {
             e.printStackTrace();
         }

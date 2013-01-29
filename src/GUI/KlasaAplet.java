@@ -76,6 +76,7 @@ import people.Sender;
 public class KlasaAplet extends JApplet{
     private static final long serialVersionUID = 1L;
     public String loginGlob = null;
+    public String passGlob = null;
     private String login = null;
     boolean log = false;
     boolean kasowanie=false;
@@ -228,14 +229,13 @@ public class KlasaAplet extends JApplet{
 
     /************** UTWORZENIE SKLADNIKOW OKNA WYSLIJ PACZKE DLA ZAREJESTROWANEGO USERA **************/
     //bartłomiej
-    MyLabel ap9l1 = new MyLabel("Imię",320,200,150,20,p9);
-    MyLabel ap9l2 = new MyLabel("Nazwisko",320,240,150,20,p9);
-    MyLabel ap9l3 = new MyLabel("serviceId ",320,280,150,20,p9);
-    MyLabel ap9l4 = new MyLabel("weightId",320,320,150,20,p9);
-    MyLabel ap9l5 = new MyLabel("amount",320,360,150,20,p9);
-    MyLabel ap9l6 = new MyLabel("paymentId: ",320,400,150,20,p9);
-    MyLabel ap9l7 = new MyLabel("statusId",320,440,150,20,p9);
-    MyLabel ap9l8 = new MyLabel("paid",320,480,150,20,p9);
+    MyLabel ap9l1 = new MyLabel("Nazwa",320,200,150,20,p9);
+    MyLabel ap9l2 = new MyLabel("Kraj",320,240,150,20,p9);
+    MyLabel ap9l3 = new MyLabel("Miejscowość",320,280,150,20,p9);
+    MyLabel ap9l4 = new MyLabel("Kod pocztowy",320,320,150,20,p9);
+    MyLabel ap9l5 = new MyLabel("Miasto",320,360,150,20,p9);
+    MyLabel ap9l6 = new MyLabel("Nr telefonu",320,400,150,20,p9);
+    MyLabel ap9l7 = new MyLabel("Liczba paczek",320,440,150,20,p9);
 
     MyLabel p9l4 = new MyLabel("Błąd wysyłki","RED");
     MyLabel p9l5 = new MyLabel("Nie wypełniono wszystkich pól.",325,440,340,20);
@@ -246,7 +246,6 @@ public class KlasaAplet extends JApplet{
     MyTextField ap9tf5 =  new MyTextField(20,470,360,150,20,p9);
     MyTextField ap9tf6 =  new MyTextField(30,470,400,200,20,p9);
     MyTextField ap9tf7 =  new MyTextField(20,470,440,150,20,p9);
-    MyTextField ap9tf8 =  new MyTextField(20,470,480,150,20,p9);
 ;
     MyButton p9b1 = new MyButton("Anuluj",50,180,200,40,p9);
     MyButton p9b2 = new MyButton("Wyślij",750,390,100,40,p9);
@@ -455,13 +454,14 @@ public class KlasaAplet extends JApplet{
         p1b2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 log = MySql.Do.p1b2(p1tf1.getText(), p1tf2.getText());
-                loginGlob = p1tf1.getText(); //bartłomiej
+                loginGlob = p1tf1.getText();
+                passGlob = p1tf2.getText();
                 //@@@@@@@@@ METODA SPRAWDZAJąCA LOGIN I HASLO JESLI POPRAWNE USTAWIA ZMIENA "log" NA TRUE
 
                 //log=true;
 
                 try {
-                    ktos.logIn(p1tf1.getText(), p1tf2.getText());
+                    ktos.setID(p1tf1.getText(), p1tf2.getText());
                 } catch (Exception e1) {
                     e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
@@ -812,7 +812,6 @@ public class KlasaAplet extends JApplet{
                 ap9tf5.setText("");
                 ap9tf6.setText("");
                 ap9tf7.setText("");
-                ap9tf8.setText("");
 
                 p9.remove(p9l4);
                 p9.remove(p9l5);
@@ -859,15 +858,12 @@ public class KlasaAplet extends JApplet{
                 if(wyslij)
                 {
                     //bartek
-                    CachedRowSetImpl crsi = MySql.Do.test(ap9tf1.getText(), ap9tf1.getText());
-
+                    Sender nowy = new Sender(loginGlob, passGlob);
                     try {
-                        crsi.first();
-                        new Pack(Integer.parseInt(crsi.getString(1)), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()));
-                    } catch (SQLException e1) {
+                        nowy.sendPackage(ap9tf1.getText(),ap9tf2.getText(),ap9tf3.getText(),ap9tf4.getText(),ap9tf5.getText(),ap9tf6.getText(),Integer.parseInt(ap9tf7.getText()));
+                    } catch (NoCountryException e1) {
                         e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                     }
-
                     remove(p9);
                     add(p8);
                 }

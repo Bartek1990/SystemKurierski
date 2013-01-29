@@ -5,7 +5,7 @@ import exceptions.AlreadyInDbException;
 
 import java.sql.SQLException;
 
-public class Employee extends Person{
+public class Employee   {
 
     int employeeId;
     public Employee(){
@@ -86,5 +86,16 @@ public class Employee extends Person{
         }
         return price;
     }
+    public void setID(String login, String password)
+    {
 
+        CachedRowSetImpl tmp = Client.request("SELECT employeeid FROM employee where login=" + login + " AND password=" + password);
+        try {
+            tmp.first();
+            this.employeeId = Integer.parseInt(tmp.getString("employeeid"));
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+    }
 }
