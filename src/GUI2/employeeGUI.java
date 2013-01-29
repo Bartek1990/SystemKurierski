@@ -72,7 +72,8 @@ public class employeeGUI extends javax.swing.JFrame {
 
                 try {
 
-                    //jTextfield11,6  do wywalenia
+                   // String login, String password, String forename, String surename, String earnings, String workTime, String nip,
+                   //         String account, String DataName, String dataDetails, String zipCode, String city, String tel, String mail
                     new Employee(jTextField1.getText(), jTextField2.getText() ,jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), jTextField6.getText(),
                              jTextField7.getText(), jTextField8.getText(), jTextField9.getText(),
                             jTextField10.getText(), jTextField11.getText(),jTextField12.getText(),jTextField13.getText(),jTextField14.getText());
@@ -95,17 +96,17 @@ public class employeeGUI extends javax.swing.JFrame {
 
         jLabel13.setText("E-mail");
 
-        jLabel11.setText("Miasto");
+        jLabel11.setText("Kod pocztowy");
 
         jLabel8.setText("Nr Konta");
 
-        jLabel9.setText("Kraj");
+        jLabel9.setText("Nazwa własna");
 
         jLabel2.setText("Hasło");
 
         jLabel4.setText("Nazwisko");
 
-        jLabel10.setText("Kod pocztowy");
+        jLabel10.setText("Dokładny adres");
 
         jLabel1.setText("login");
 

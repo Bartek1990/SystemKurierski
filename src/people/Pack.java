@@ -17,7 +17,7 @@ public class Pack
         Client.request("INSERT INTO `pds`.`shipment` (`shipmentid`, `dataid`, `sourceid`, `returnid`, `serviceid`, " +
                 "`weightid`, `amount`, `paymentid`, `sdate`, `ddate`, `statusid`, `paid`) VALUES (NULL, \'"+recipentId+"\', \'"+senderId+"\', \'"+senderId+"\'" +
                 ", \'"+serviceId+"\', \'"+weightId+"\', \'"+amount+"\', \'"+paymentId+"\', " +
-                "CURRENT_TIMESTAMP, '0000-00-00 00:00:00', \'"+statusId+"\', \'"+paid+"\');");
+                "CURRENT_TIMESTAMP, \'"+statusId+"\', \'"+paid+"\');");
 
         CachedRowSetImpl tmp = Client.request("SELECT MAX(shipmentid) FROM shipment");
         try {
