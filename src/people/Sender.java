@@ -4,14 +4,14 @@ package people;
 import com.sun.rowset.CachedRowSetImpl;
 import exceptions.AlreadyInDbException;
 import exceptions.NoCountryException;
-
+import GUI.KlasaAplet;
 import java.sql.SQLException;
 
 public class Sender extends Person {
     int senderId;
 
     public Sender(){
-
+        CachedRowSetImpl tmp = Client.request("SELECT * FROM user WHERE login = '" + loginGlob + "'");
     }
 
     public Sender(String login, String pass, String tel, String imie,

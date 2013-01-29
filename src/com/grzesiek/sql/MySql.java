@@ -69,6 +69,14 @@ public abstract class MySql
 			
 			return false;*/
 		}
+        public static CachedRowSetImpl test(String forename, String surename)
+        {
+            CachedRowSetImpl temp = request("select userid from person where forename = '" + forename + "' and surename = '" + surename + "'");
+
+            checkMessage(temp);
+
+            return temp;
+        }
 		
 		public static boolean p7b2(String login, String pass, String tel, String imie, 
 				String nazwisko, String nip, String adres, String kod, 

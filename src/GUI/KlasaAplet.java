@@ -75,7 +75,7 @@ import people.Sender;
  */
 public class KlasaAplet extends JApplet{
     private static final long serialVersionUID = 1L;
-
+    public String loginGlob = null;
     private String login = null;
     boolean log = false;
     boolean kasowanie=false;
@@ -227,9 +227,9 @@ public class KlasaAplet extends JApplet{
 
 
     /************** UTWORZENIE SKLADNIKOW OKNA WYSLIJ PACZKE DLA ZAREJESTROWANEGO USERA **************/
-
-    MyLabel ap9l1 = new MyLabel("recipentId",320,200,150,20,p9);
-    MyLabel ap9l2 = new MyLabel("senderId",320,240,150,20,p9);
+    //bartłomiej
+    MyLabel ap9l1 = new MyLabel("Imię",320,200,150,20,p9);
+    MyLabel ap9l2 = new MyLabel("Nazwisko",320,240,150,20,p9);
     MyLabel ap9l3 = new MyLabel("serviceId ",320,280,150,20,p9);
     MyLabel ap9l4 = new MyLabel("weightId",320,320,150,20,p9);
     MyLabel ap9l5 = new MyLabel("amount",320,360,150,20,p9);
@@ -455,6 +455,7 @@ public class KlasaAplet extends JApplet{
         p1b2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 log = MySql.Do.p1b2(p1tf1.getText(), p1tf2.getText());
+                loginGlob = p1tf1.getText(); //bartłomiej
                 //@@@@@@@@@ METODA SPRAWDZAJąCA LOGIN I HASLO JESLI POPRAWNE USTAWIA ZMIENA "log" NA TRUE
 
                 //log=true;
@@ -857,7 +858,16 @@ public class KlasaAplet extends JApplet{
 
                 if(wyslij)
                 {
-                    new Pack(Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()));
+                    //bartek
+                    CachedRowSetImpl crsi = MySql.Do.test(ap9tf1.getText(), ap9tf1.getText());
+
+                    try {
+                        crsi.first();
+                        new Pack(Integer.parseInt(crsi.getString(1)), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()), Integer.parseInt(ap9tf1.getText()));
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    }
+
                     remove(p9);
                     add(p8);
                 }
