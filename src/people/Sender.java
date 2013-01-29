@@ -38,7 +38,7 @@ public class Sender extends Person {
                 {
                     String krajid = null;
                     //sprawdzenie czy podany kraj juz jest wpisany
-                    CachedRowSetImpl tmp = Client.request("SELECT countryid FROM country WHERE name = '" + kraj + "' LIMIT 1");
+                    CachedRowSetImpl tmp = Client.request("SELECT countryid FROM country WHERE name = '"+kraj+"' LIMIT 1");
                     if(tmp.first())
                     {
                         krajid = tmp.getString(1);
@@ -49,8 +49,8 @@ public class Sender extends Person {
                     }
 
                     Client.request("INSERT INTO data (name, countryid, details, zipcode, city, tel, mail) " +
-                            "VALUES ('" + imie + " " + nazwisko + "'," + krajid + ",'" + adres + "','"
-                            + kod + "','" + miasto + "','" + tel + "','" + mail + "')");
+                            "VALUES ('" + imie + "'," + krajid + ",'" + adres + "','"
+                            + Integer.parseInt(kod) + "','" + miasto + "','" + tel + "','" + mail + "')");
                     //checkMessage(request("select max(countryid) from country"));
                     Client.request("INSERT INTO user (login, password, dataid, nip) VALUES ('" + login + "','" + pass + "',(SELECT MAX(dataid) FROM data),'" + nip + "')");
                     Client.request("INSERT INTO person VALUES ((SELECT MAX(userid) FROM user),'" + imie + "','" + nazwisko + "')");

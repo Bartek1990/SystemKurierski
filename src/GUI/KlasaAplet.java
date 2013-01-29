@@ -1,6 +1,6 @@
 package GUI;
 import java.awt.Color;
-import people.Sender;
+import people.*;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -79,6 +79,7 @@ public class KlasaAplet extends JApplet{
     private String login = null;
     boolean log = false;
     boolean kasowanie=false;
+    Sender ktos;
     Color kolortla = new Color(13,9,10);
     //@@@@@@@@@ Grzesiek ciebie iteresuje tylko ta klasa, w innych nie wprowadzaj żadnych zmian
     //@@@@@@@@@ jak się to posypie to nie wiem czy się połape złorzyc to spowrotem
@@ -111,7 +112,7 @@ public class KlasaAplet extends JApplet{
     MyButton p0b1 = new MyButton("Lokalizuj paczkę",50,180,200,40,p0);
     MyButton p0b2 = new MyButton("Zaloguj",50,240,200,40,p0);
     MyButton p0b3 = new MyButton("Zarejestruj się w systemie",50,300,200,40,p0);
-    MyButton p0b4 = new MyButton("Wyślij paczkę",50,360,200,40,p0);
+    //MyButton p0b4 = new MyButton("Wyślij paczkę",50,360,200,40,p0);
     MyLabel p0l = new MyLabel("<html>Chcesz wysłać towar wymagający specjalnego traktowania lub doręczyć przesyłkę na jutro, a przy tym miał możliwość śledzenia jej losów? Fast Pack dostarczy przesyłkę lub dokument w każde miejsce na świecie.<br> Sprawdź nas.<br><br>Fast Pack koncentruje się na wybranych sektorach przemysłu, by nasi klienci mogli korzystać nie tylko z doświadczenia specjalistów w zakresie logistyki, ale także z ich wiedzy dotyczącej rynków. Opracowane przez nas, znakomite rozwiązania przeznaczone dla poszczególnych sektorów przemysłu dają naszym klientom istotną przewagę konkurencyjną.</html>",320,200,400,250,p0);
 
     /************** UTWORZENIE SKLADNIKOW OKNA LOGOWANIA **************/
@@ -323,19 +324,7 @@ public class KlasaAplet extends JApplet{
         modellisty1.Add("12-03-12 : Dong Xuan 31-516 Kraków, Mogilska 18 ");
         modellisty1.Add("15-06-12 : Chiński Pałac Kraków, Mikołajska");
         modellisty1.Add("08-10-12 : Dong Hung 31-146 Kraków, Długa 50");
-        modellisty1.Add("3 opcja");
-        modellisty1.Add("3 opcja");
-        modellisty1.Add("3 opcja");
-        modellisty1.Add("3 opcja");
-        modellisty1.Add("3 opcja");
-        modellisty1.Add("3 opcja");
-        modellisty1.Add("3 opcja");
-        modellisty1.Add("3 opcja");
-		    /*modellisty2.Add("Grzesiek Chyb");
-		    modellisty2.Add("Chytra Baba Z Radomia");
-		    modellisty2.Add("Gracjan Z Krakowa");
-		    modellisty2.Add("Bracia Figo Fagot");
-		    */
+
 
         // UNIKALNE CECHY NIEKTORYCH KOMPONENTÓW NIE KASOWAC !!!!!!!!!!!
         p15.add(p15cb1);
@@ -420,7 +409,7 @@ public class KlasaAplet extends JApplet{
             }
         });
 
-        p0b4.addActionListener(new ActionListener(){
+        /*p0b4.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
 
                 ////NIE RUSZAC///
@@ -435,7 +424,7 @@ public class KlasaAplet extends JApplet{
                 repaint();
                 validate();
             }
-        });
+        });  */
 
         /********** OBSLUGA PRZYCISKOW OKNA P1 **********/
 
@@ -453,11 +442,16 @@ public class KlasaAplet extends JApplet{
 
         p1b2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-
+                log = MySql.Do.p1b2(p1tf1.getText(), p1tf2.getText());
                 //@@@@@@@@@ METODA SPRAWDZAJąCA LOGIN I HASLO JESLI POPRAWNE USTAWIA ZMIENA "log" NA TRUE
 
                 //log=true;
-                log = MySql.Do.p1b2(p1tf1.getText(), p1tf2.getText());
+
+                try {
+                    ktos.logIn(p1tf1.getText(), p1tf2.getText());
+                } catch (Exception e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
 
 
                 if(log)
@@ -773,9 +767,12 @@ public class KlasaAplet extends JApplet{
                      //   p7tf6.getText(), p7tf14.getText(), p7tf15.getText()//String corp, String reg
                // );
                 try {
+                    //System.out.println(p7tf1.getText() + p7tf2.getText() + p7tf3.getText() + p7tf4.getText() + p7tf5.getText() + p7tf6.getText() + p7tf10.getText() + p7tf11.getText() + p7tf12.getText() + p7tf13.getText() + p7tf14.getText() + p7tf15.getText() + p7tf16.getText());
                     new Sender(p7tf1.getText(), p7tf2.getText(), p7tf3.getText(), p7tf4.getText(),
-                            p7tf5.getText(), p7tf10.getText(), p7tf11.getText(), p7tf13.getText(),
-                            p7tf6.getText(), p7tf12.getText(), p7tf16.getText(),  p7tf14.getText(), p7tf15.getText());
+                            p7tf5.getText(), p7tf16.getText(), p7tf10.getText(), p7tf11.getText(),
+                            p7tf13.getText(), p7tf12.getText(), p7tf6.getText(), p7tf14.getText(), p7tf15.getText());
+
+
                     p7.add(p7l7);
                 } catch (AlreadyInDbException e1) {
                     e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

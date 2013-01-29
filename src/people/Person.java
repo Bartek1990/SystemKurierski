@@ -1,6 +1,6 @@
 package people;
 
-abstract class Person {
+public abstract class Person {
     public void logIn(String login, String password) throws Exception{
         if(login.equals("") || password.equals("")){
                 throw new Exception();
