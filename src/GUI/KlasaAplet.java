@@ -19,60 +19,7 @@ import exceptions.AlreadyInDbException;
 import exceptions.NoCountryException;
 import people.Sender;
 
-/*NIE WIEM CZY TEN DUZY KOMENT NA DOLE JEST AKTUALNY BO SPORO POZMIENIALEM
- * LEPIEJ ZWRACAC UWAGE NA MAŁE KOMENTARZE UMIESZCZONE W KODZIE - Brajan
- * 
- * na samym poczatku znajduje sie zmienna log
- * mowi ona apletowi czy uzytkownik jest zalogowany czy nie
- * dzieki temu aplet wie jakie okienka wyswietlac
- * 
- * narazie dziala tylko wylogowywanie bo logowania nie dalo sie 
- * fizycznie zrobic bo nie ma jeszcze bazy danych z ktorej bedziemy sciagac
- * loginy i hasla
- * 
- * jesli chcesz testowac aplikacje na uzytkowniku zalogowanym zmien wartosc 
- * zmiennej na true
- * 
- * i w funkcji swingGUI() jako pierwszy wyswietlany panel ustaw na p6
- * (funkcja add(p0) na samym początku swingGUI)
- * 
- *  dzialanie programu:
- *  najpierw tworzymy wszystkie oniekna - kazde jest opisane
- *  potem tworzymy wszystkie skladniki okienek - kazde jest opisane
- *  konstruktor dodaje odpowiednie skladniki do odpowiednich okienek
- *  
- *  okienka posiadaja nazwy od p0 - p15
- *  
- *  kazdy skladnik okienka zaczyna sie od prefixu oznaczajacego okienko
- *  np p0b1 - button pierwszy okienka p0
- *  
- *  oznaczenia skladnikow:
- *  b - buttony np p0b1, p4b2
- *  tf - textfield np p8tf1, p8tf2
- *  l - label np p0l1, p5l3
- *  
- *  przypozadkowujemy textfieldy do labelow o tym samym numerze
- *  np p0l1 to label pierwszy w okienku p0 przypozadkowany 
- *  do p0tf1 - textfielda pierwszego w okienku p0
- *  
- *  w funkcji swingGUI() znajduja sie tylko actionlistnery
- *  kazdy przycisk ma swoj actionlistner powodujacy wykonanie jakiejs akcji,
- *  zamkniecie aktualnego okienka i otworzenie nastepnego
- *  narazie przyciski nie wykonuja zadnych akcji z wyjatkiem przechodzenia
- *  pomiedzy okienkami
- *  
- *  w tej klasie piszemy tylko grafike i obsluge przyciskow
- *  wsystkie inne funkcjie tworzymy w innych klasach a najlepiej tez w innych
- *  paczkach tak aby za kazda funkcje programu odpowiadala osobna paczka
- *  np komunikacja z serwerem znajduje sie w paczce 'serwer' i tam znajduja sie
- *  wszystkie klasy do tego potrzebne
- *  
- *  niektore przyciski sa nie obsluzone (nie robia nic) z powodu braku serwer
- *  
- *  jesli ktos cos dodaje niech opisuje to najlepiej jak potrafi aby uniknac
- *  bledow, najlepiej opisywac wszystko w podobny sposob do istniejacego
- *  
- */
+
 public class KlasaAplet extends JApplet{
     private static final long serialVersionUID = 1L;
     public String loginGlob = null;
@@ -332,9 +279,7 @@ public class KlasaAplet extends JApplet{
     {
         /********************** DODANIE SKLADNIKOW DO OKNA GLOWNEGO **********************/
         //// dodanie do list  na potrzeby testowania
-        modellisty1.Add("12-03-12 : Dong Xuan 31-516 Kraków, Mogilska 18 ");
-        modellisty1.Add("15-06-12 : Chiński Pałac Kraków, Mikołajska");
-        modellisty1.Add("08-10-12 : Dong Hung 31-146 Kraków, Długa 50");
+
 
 
         // UNIKALNE CECHY NIEKTORYCH KOMPONENTÓW NIE KASOWAC !!!!!!!!!!!
@@ -470,6 +415,8 @@ public class KlasaAplet extends JApplet{
                 if(log)
                 {
                     login = p1tf1.getText();
+                    p1.remove(p1l4);
+                    p1.remove(p1l5);
                     p1.add(p1l3);
                 }
                 else
@@ -861,6 +808,8 @@ public class KlasaAplet extends JApplet{
                     Sender nowy = new Sender(loginGlob, passGlob);
                     try {
                         nowy.sendPackage(ap9tf1.getText(),ap9tf2.getText(),ap9tf3.getText(),ap9tf4.getText(),ap9tf5.getText(),ap9tf6.getText(),Integer.parseInt(ap9tf7.getText()));
+                        modellisty1.Add("13-01-29 : "+ap9tf1.getText()+" "+ap9tf4.getText()+" "+ap9tf5.getText()+" "+ap9tf6.getText());
+
                     } catch (NoCountryException e1) {
                         e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                     }

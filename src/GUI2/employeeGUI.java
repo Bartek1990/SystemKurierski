@@ -37,13 +37,11 @@ public class employeeGUI extends javax.swing.JFrame {
         jList1 = new javax.swing.JList();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+
+
         jButton1 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
+
         jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -53,18 +51,28 @@ public class employeeGUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
+
         jLabel12 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new JButton();
+
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField11 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
+
+        jTextField13 = new javax.swing.JTextField();
+        jTextField14 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField12 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField9 = new javax.swing.JTextField();
+        jTextField10 = new javax.swing.JTextField();
+
+        jTextField5 = new javax.swing.JTextField();
 
         jButton1.addActionListener(new ActionListener() {
             @Override
@@ -73,10 +81,10 @@ public class employeeGUI extends javax.swing.JFrame {
                 try {
 
                    // String login, String password, String forename, String surename, String earnings, String workTime, String nip,
-                   //         String account, String DataName, String dataDetails, String zipCode, String city, String tel, String mail
+                   // String account, String DataName, String dataDetails, String zipCode, String city, String tel, String mail
                     new Employee(jTextField1.getText(), jTextField2.getText() ,jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), jTextField6.getText(),
                              jTextField7.getText(), jTextField8.getText(), jTextField9.getText(),
-                            jTextField10.getText(), jTextField11.getText(),jTextField12.getText(),jTextField13.getText(),jTextField14.getText());
+                            jTextField10.getText(), jTextField11.getText(),jTextField12.getText(),jTextField13.getText(),"");
                 } catch (AlreadyInDbException e1) {
                     e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
@@ -94,7 +102,7 @@ public class employeeGUI extends javax.swing.JFrame {
 
         jButton1.setText("Wyślij");
 
-        jLabel13.setText("E-mail");
+        jLabel13.setText("Telefon");
 
         jLabel11.setText("Kod pocztowy");
 
@@ -114,7 +122,7 @@ public class employeeGUI extends javax.swing.JFrame {
 
             jLabel3.setText("Imię");
 
-            jLabel12.setText("Telefon");
+            jLabel12.setText("Miasto");
 
             jLabel5.setText("Pensja");
 

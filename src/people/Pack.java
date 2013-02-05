@@ -36,7 +36,7 @@ public class Pack
     }
     public Pack(int recipentId, int senderId, int amount)
     {
-        int serviceId = 1; //id stałe gdyż wyłącznie jedna opcja dostawy
+        int serviceId = 2; //id stałe gdyż wyłącznie jedna opcja dostawy
         int paymentId = 1; //tylko jeden sposób zapłaty
         System.out.println("AAAA");
         Client.request("INSERT INTO `pds`.`shipment` (`shipmentid`, `dataid`, `sourceid`, `returnid`, `serviceid`, " +
